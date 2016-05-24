@@ -19,12 +19,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".plantsGridView">
+        <activity android:name=".plantsGridView"/>
+
+        <activity android:name=".PlantFrameName"/>
+
+        <activity android:name=".PlantMenu"/>
+
+        <activity android:name=".RecognitionActivity" />
+        <activity android:name=".IdentifyOutcome">
+
         </activity>
-        <activity android:name=".PlantFrameName">
-        </activity>
-        <activity android:name=".PlantMenu">
-        </activity>
+
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

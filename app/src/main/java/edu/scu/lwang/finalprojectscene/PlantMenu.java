@@ -56,7 +56,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    PlantDBHelper db;
+    PlantCollectionDBHelper db;
     final String myPreference = "wateve";
     SharedPreferences mySharedPreferences;
     SharedPreferences.Editor myEditor;
@@ -74,7 +74,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("_id");
         System.out.println("this is _id after fetching it in PlantMenu: " + id);
-        PlantDBHelper db=new PlantDBHelper(this);
+        PlantCollectionDBHelper db=new PlantCollectionDBHelper(this);
         Plant plant = db.fetchPlantWithId(id);
 
         ImageView iv = (ImageView) findViewById(R.id.plantImage);
@@ -109,22 +109,25 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
 
 
         Button button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
-                //    db = new dbHelper(this);
-                //    cursor = db.fetchAll();
-
-                builder.setIcon(R.mipmap.ic_launcher)
-                        .setTitle("Next Watering date")
-                        .setMessage("May 5, 2016")
-                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
-                        .setCancelable(true)
-                ;
-                builder.create().show();
-            }
-        });
+        //------------------->Mingming put code here to appear the next water date
+        //
+        //
+//        button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
+//                //    db = new dbHelper(this);
+//                //    cursor = db.fetchAll();
+//
+//                builder.setIcon(R.mipmap.ic_launcher)
+//                        .setTitle("Next Watering date")
+//                        .setMessage("May 5, 2016")
+//                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
+//                        .setCancelable(true)
+//                ;
+//                builder.create().show();
+//            }
+//        });
 
     }
     //        button3.setOnClickListener(new View.OnClickListener() {

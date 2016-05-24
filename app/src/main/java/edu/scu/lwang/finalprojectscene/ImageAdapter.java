@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
@@ -60,11 +61,11 @@ public class ImageAdapter extends BaseAdapter {
             int id= cursor.getInt(0);
             String plantName= cursor.getString(1);
             String plantPicPath= cursor.getString(2);
-            String waterInterval = Integer.toString(cursor.getInt(3));
-            String lastWater = cursor.getString(4);
-            String date = cursor.getString(9);
+            int waterInterval = cursor.getInt(3);
+            int lastWater = cursor.getInt(4);
+            int date = cursor.getInt(9);
             //CREATE PLAYER
-            Plant contactI= new Plant(id, plantName, plantPicPath, date, waterInterval, lastWater);
+            Plant contactI= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
 
             //ADD TO PLAYERS
             mThumbIds.add(contactI);

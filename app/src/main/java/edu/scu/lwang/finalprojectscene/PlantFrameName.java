@@ -11,9 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Sarah on 5/23/2016.
@@ -56,12 +58,11 @@ public class PlantFrameName extends AppCompatActivity {
             });
             builder.show();
         }else{
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            String date = df.format(Calendar.getInstance().getTime());
 
-            PlantDBHelper db=new PlantDBHelper(this);
+            Date date = new Date();
+            PlantCollectionDBHelper db=new PlantCollectionDBHelper(this);
             Intent intent=new Intent(PlantFrameName.this, plantsGridView.class);
-            db.add(new Plant(0, plantName, plantPicPath, date, "", ""));
+            db.add(new Plant(0, plantName, plantPicPath, new Date(), 0, new Date()));
 
             startActivity(intent);
         }

@@ -1,5 +1,8 @@
 package edu.scu.lwang.finalprojectscene;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Sarah on 5/23/2016.
  */
@@ -8,17 +11,28 @@ public class Plant {
     protected int id;
     protected String plantName;
     protected String photoPath;
-    protected String waterInterval;
-    protected String lastWater;
-    protected String date;
+    protected int waterInterval;
+    protected Date lastWater;
+    protected Date date;
+    Date nextWater;
 
-    public Plant(int id, String plantName, String photoPath, String date, String waterInterval, String lastWater) {
+    public Plant() {
+
+    }
+
+    public Plant(int id, String plantName, String photoPath, Date date, int waterInterval, Date lastWater) {
         this.id = id;
         this.plantName = plantName;
         this.photoPath = photoPath;
         this.waterInterval = waterInterval;
         this.lastWater = lastWater;
         this.date = date;
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+
+        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
+        nextWater = cal.getTime();
     }
 
     public String getPlantName() {
@@ -37,27 +51,27 @@ public class Plant {
         this.photoPath = photoPath;
     }
 
-    public String getWaterInterval() {
+    public int getWaterInterval() {
         return waterInterval;
     }
 
-    public void setWaterInterval(String waterInterval) {
+    public void setWaterInterval(int waterInterval) {
         this.waterInterval = waterInterval;
     }
 
-    public String getLastWater() {
+    public Date getLastWater() {
         return lastWater;
     }
 
-    public void setLastWater(String lastWater) {
+    public void setLastWater(Date lastWater) {
         this.lastWater = lastWater;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
