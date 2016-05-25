@@ -19,7 +19,7 @@
             <!--</intent-filter>-->
         </activity>
 
-        <activity android:name=".plantsGridView">
+        <activity android:name=".PlantsGridView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

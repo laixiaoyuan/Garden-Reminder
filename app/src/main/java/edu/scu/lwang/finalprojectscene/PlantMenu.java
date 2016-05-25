@@ -149,7 +149,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                //boolean result = Utility.checkPermission(plantsGridView.this);
+                //boolean result = Utility.checkPermission(PlantsGridView.this);
                 //System.out.println("hi i passed with " + result);
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask="Take Photo";
