@@ -30,6 +30,7 @@ import java.util.Date;
 
 public class PlantsGridView extends AppCompatActivity {
     final int notificationId = 1111;
+    
 
     Context context;
     //    PendingIntent pendingIntent;
@@ -50,7 +51,7 @@ public class PlantsGridView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  addNewPlant();
+                //  addNewPlant();
                 Intent intent=new Intent(PlantsGridView.this, RecognitionActivity.class);
                 startActivity(intent);
             }
@@ -224,3 +225,4 @@ public class PlantsGridView extends AppCompatActivity {
 
 
 }
+
