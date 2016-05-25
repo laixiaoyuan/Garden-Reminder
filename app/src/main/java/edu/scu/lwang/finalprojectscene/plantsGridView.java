@@ -1,6 +1,9 @@
 package edu.scu.lwang.finalprojectscene;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +25,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -29,11 +33,21 @@ import java.util.Date;
  */
 
 public class plantsGridView extends AppCompatActivity {
+    final int notificationId = 1111;
+
+    Context context;
+    //    PendingIntent pendingIntent;
+    AlarmManager alarm_manager;
+    //    ArrayList<AlarmManager> alarmList = new ArrayList<>();
+    Calendar calendar;
+//    ArrayList<Calendar> calList = new ArrayList<>();
+
     String fileName;
     String userChoosenTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context = this;
         setContentView(R.layout.plantsgridview);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -65,6 +79,27 @@ public class plantsGridView extends AppCompatActivity {
 //                        Toast.LENGTH_SHORT).show();
             }
         });
+        // set callback for create notification button
+
+
+        calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 19);
+
+
+
+        alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        // create an intent to ReminderReceiver
+        Intent toReceiver = new Intent(this, ReminderReceiver.class);
+
+        // create a pending intent to delay the intent until the reminder time
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(plantsGridView.this, 0, toReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Set the remainder manager
+        alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
+
     }
 
 //    private void addNewPlant(){
