@@ -26,8 +26,9 @@ public class PlantDBHelper extends SQLiteOpenHelper {
                     "  _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "  PlantName TEXT," +
                     "  PhotoPath TEXT," +
-                    "  WaterInterval INTEGER" +
-                    "  LastWater DATE);";
+                    "  WaterInterval INTEGER," +
+                    "  LastWater INTEGER," +
+                    "  NextWater INTEGER);";
 
     static private final String SQL_DROP_TABLE = "DROP TABLE plant";
 
