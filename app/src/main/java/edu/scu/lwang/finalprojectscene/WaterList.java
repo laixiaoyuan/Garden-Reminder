@@ -42,7 +42,7 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         cal.add(Calendar.DATE, -1);
         Date date = cal.getTime();
 
-        Plant pi = new Plant("flower", "path", new Date(),2);
+        Plant pi = new Plant(111, "flowerName", "path", new Date(),2, new Date());
         dbHelper.add(pi);
 
         maxRecId = dbHelper.getMaxRecID();
@@ -63,8 +63,8 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
     }
 
     private void addNewPhoto() {
-        Plant pi = new Plant("flower", "path", new Date(), 3);
-        dbHelper.add(pi);
+//        Plant pi = new Plant("flower", "path", new Date(), 3);
+//        dbHelper.add(pi);
 
         // update cursor as well as notifying the listview on the change
         cursor.requery();
