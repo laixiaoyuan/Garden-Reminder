@@ -162,7 +162,7 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         String plantPicPath= cursor.getString(2);
         int waterInterval = cursor.getInt(3);
         int lastWater = cursor.getInt(4);
-        int date = cursor.getInt(9);
+      //  int date = cursor.getInt(9);
 
         Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
 

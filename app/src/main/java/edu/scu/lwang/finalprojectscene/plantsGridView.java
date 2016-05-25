@@ -54,7 +54,9 @@ public class plantsGridView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNewPlant();
+              //  addNewPlant();
+                Intent intent=new Intent(plantsGridView.this, RecognitionActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -66,7 +68,7 @@ public class plantsGridView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Plant p = (Plant) gridview.getAdapter().getItem(position);
-                Intent i = new Intent(plantsGridView.this, RecognitionActivity.class);
+                Intent i = new Intent(plantsGridView.this, PlantMenu.class);
                 System.out.println("this is the ID after touch in the plantsGridView: " + p.getId());
                 Bundle b = new Bundle();
                 b.putInt("_id", p.getId());
@@ -100,50 +102,50 @@ public class plantsGridView extends AppCompatActivity {
 
     }
 
-    private void addNewPlant(){
-        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
-                "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(plantsGridView.this);
-        builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                //boolean result = Utility.checkPermission(plantsGridView.this);
-                //System.out.println("hi i passed with " + result);
-                if (items[item].equals("Take Photo")) {
-                    userChoosenTask="Take Photo";
-                    //   if(result)
-                    cameraIntent();
-                } else if (items[item].equals("Choose from Gallery")) {
-                    userChoosenTask="Choose from Gallery";
-                    //   if(result)
-                    galleryIntent();
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
-
-    private void cameraIntent(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) == null) {
-            Toast.makeText(getApplicationContext(), "Cannot take pictures on this device!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        fileName = getOutputFileName();
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(fileName));
-
-        startActivityForResult(intent, 1234);
-    }
+//    private void addNewPlant(){
+//        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
+//                "Cancel" };
+//        AlertDialog.Builder builder = new AlertDialog.Builder(plantsGridView.this);
+//        builder.setTitle("Add Photo!");
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int item) {
+//                //boolean result = Utility.checkPermission(plantsGridView.this);
+//                //System.out.println("hi i passed with " + result);
+//                if (items[item].equals("Take Photo")) {
+//                    userChoosenTask="Take Photo";
+//                    //   if(result)
+//                    cameraIntent();
+//                } else if (items[item].equals("Choose from Gallery")) {
+//                    userChoosenTask="Choose from Gallery";
+//                    //   if(result)
+//                    galleryIntent();
+//                } else if (items[item].equals("Cancel")) {
+//                    dialog.dismiss();
+//                }
+//            }
+//        });
+//        builder.show();
+//    }
+//
+//    private void cameraIntent(){
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        if (intent.resolveActivity(getPackageManager()) == null) {
+//            Toast.makeText(getApplicationContext(), "Cannot take pictures on this device!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        fileName = getOutputFileName();
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(fileName));
+//
+//        startActivityForResult(intent, 1234);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 1234 || resultCode != RESULT_OK) return;
 
-        Intent intent=new Intent(plantsGridView.this, PlantFrameName.class);
+        Intent intent=new Intent(plantsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
 
         Bundle bundle = new Bundle();
         bundle.putString("plantPicPath", fileName);
