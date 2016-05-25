@@ -30,7 +30,7 @@ import java.util.Date;
 
 public class PlantsGridView extends AppCompatActivity {
     final int notificationId = 1111;
-    
+
 
     Context context;
     //    PendingIntent pendingIntent;
