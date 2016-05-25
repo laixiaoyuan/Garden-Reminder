@@ -58,8 +58,8 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
 //        Intent viewPhoto = new Intent(MainActivity.this, ViewPhoto.class);
 //        viewPhoto.putExtra("ImagePath", rowDir).putExtra("Caption", rowNote);
 //        startActivity(viewPhoto);
-        waterPlant(cursor.getInt(cursor.getColumnIndex("_id")));
-//        deletePlant(cursor.getInt(cursor.getColumnIndex("_id")));
+//        waterPlant(cursor.getInt(cursor.getColumnIndex("_id")));
+        deletePlant(cursor.getInt(cursor.getColumnIndex("_id")));
     }
 
     private void addNewPhoto() {
