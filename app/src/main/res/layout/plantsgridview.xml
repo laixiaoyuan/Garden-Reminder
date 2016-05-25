@@ -19,7 +19,9 @@
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_above="@+id/fab" />
+        android:layout_above="@+id/fab"
+
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -29,5 +31,6 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add" />
+
 
 </RelativeLayout>

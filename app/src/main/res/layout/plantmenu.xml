@@ -60,7 +60,8 @@
                         android:scaleType="fitCenter"
                         android:layout_width="160dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary"
+                        android:layout_marginBottom="20dp" />
 
                     <Button
                         android:id="@+id/button3"
@@ -87,7 +88,8 @@
                         android:scaleType="fitCenter"
                         android:layout_width="160dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary"
+                        android:layout_marginBottom="20dp" />
 
                     <Button
                         android:id="@+id/button4"

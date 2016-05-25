@@ -166,7 +166,6 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 
         Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
 
-
         return plant;
     }
     public void delete(int id) {
