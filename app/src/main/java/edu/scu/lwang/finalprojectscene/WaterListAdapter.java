@@ -37,7 +37,7 @@ public class WaterListAdapter extends CursorAdapter {
         }else if(fromNow == 1){
             waterDay = "Tomorrow";
         }else{
-            waterDay = "After";
+            waterDay = "In 1 week";
         }
         ((ImageView)view.findViewById(R.id.imageView2)).setImageURI(Uri.parse(imagePath));
         TextView tvName = (TextView)view.findViewById(R.id.textView2);
