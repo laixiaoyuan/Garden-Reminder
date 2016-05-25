@@ -60,7 +60,7 @@ public class PlantFrameName extends AppCompatActivity {
         }else{
 
             Date date = new Date();
-            PlantCollectionDBHelper db=new PlantCollectionDBHelper(this);
+            PlantDBHelper db=new PlantDBHelper(this);
             Intent intent=new Intent(PlantFrameName.this, plantsGridView.class);
             db.add(new Plant(0, plantName, plantPicPath, new Date(), 0, new Date()));
 

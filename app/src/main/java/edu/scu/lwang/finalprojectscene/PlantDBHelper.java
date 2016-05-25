@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 
 /**
@@ -100,6 +101,25 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         String SQL_DELETE="DELETE FROM contact WHERE _id=" + id + ";";
         db.execSQL(SQL_DELETE);
          */
+    }
+
+    public Plant fetchPlantWithId(int _id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        System.out.println("this is the id to get from fetching plant after touch: " + _id);
+        Cursor cursor = db.rawQuery("SELECT * FROM plantCollection WHERE _id = ?;", new String[]{String.valueOf(_id)});
+        cursor.moveToFirst();
+
+        int id= cursor.getInt(0);
+        String plantName= cursor.getString(1);
+        String plantPicPath= cursor.getString(2);
+        int waterInterval = cursor.getInt(3);
+        int lastWater = cursor.getInt(4);
+        int date = cursor.getInt(9);
+
+        Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
+
+
+        return plant;
     }
 
 //    public Hashtable<String, String> fetchPlantName() {

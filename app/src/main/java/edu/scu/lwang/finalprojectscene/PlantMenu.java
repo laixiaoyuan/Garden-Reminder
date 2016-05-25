@@ -56,7 +56,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    PlantCollectionDBHelper db;
+    PlantDBHelper db;
     final String myPreference = "wateve";
     SharedPreferences mySharedPreferences;
     SharedPreferences.Editor myEditor;
@@ -74,7 +74,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("_id");
         System.out.println("this is _id after fetching it in PlantMenu: " + id);
-        PlantCollectionDBHelper db=new PlantCollectionDBHelper(this);
+        PlantDBHelper db=new PlantDBHelper(this);
         Plant plant = db.fetchPlantWithId(id);
 
         ImageView iv = (ImageView) findViewById(R.id.plantImage);
