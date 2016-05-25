@@ -9,11 +9,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
+import java.util.Calendar;
 
 /**
  * Created by mingming on 5/9/16.
@@ -28,8 +26,9 @@ public class PlantDBHelper extends SQLiteOpenHelper {
                     "  _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "  PlantName TEXT," +
                     "  PhotoPath TEXT," +
-                    "  WaterInterval INTEGER" +
-                    "  LastWater DATE);";
+                    "  WaterInterval INTEGER," +
+                    "  LastWater INTEGER," +
+                    "  NextWater INTEGER);";
 
     static private final String SQL_DROP_TABLE = "DROP TABLE plant";
 
@@ -71,6 +70,31 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM plant;", null);
     }
 
+    public Cursor waterList(){
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            // arguments injected by manual string concatenation
+            Calendar cal = Calendar.getInstance(); // creates calendar
+            cal.add(Calendar.HOUR_OF_DAY, 3 * 24); // 3 days after today
+            long in3day = cal.getTimeInMillis();
+
+            String mySQL = " select *"
+                    + "   from plant "
+                    + "  where NextWater <= "  + in3day
+                    ;
+
+            Cursor c1 = db.rawQuery(mySQL, null);
+
+            return c1;
+
+        } catch (Exception e) {
+            Log.e("\nError: " , e.getMessage().toString());
+            return null;
+
+        }
+
+    }
+
     public void add(Plant pi) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -103,25 +127,6 @@ public class PlantDBHelper extends SQLiteOpenHelper {
          */
     }
 
-    public Plant fetchPlantWithId(int _id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        System.out.println("this is the id to get from fetching plant after touch: " + _id);
-        Cursor cursor = db.rawQuery("SELECT * FROM plantCollection WHERE _id = ?;", new String[]{String.valueOf(_id)});
-        cursor.moveToFirst();
-
-        int id= cursor.getInt(0);
-        String plantName= cursor.getString(1);
-        String plantPicPath= cursor.getString(2);
-        int waterInterval = cursor.getInt(3);
-        int lastWater = cursor.getInt(4);
-        int date = cursor.getInt(9);
-
-        Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
-
-
-        return plant;
-    }
-
 //    public Hashtable<String, String> fetchPlantName() {
 //        Hashtable<String, String> plantNameHash = new Hashtable<String, String>();
 //        SQLiteDatabase db = this.getReadableDatabase();
@@ -147,4 +152,22 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 //        }
 //        return plantNameHash;
 //    }
+public void waterToday(int id) {
+    // action query performed using execSQL
+    // add 'XXX' to the name of person whose phone is 555-1111
+//        txtMsg.append("\n-updateDB");
+
+    try {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int date = (int) (Calendar.getInstance().getTimeInMillis());
+        String query = " update plant set lastWater =" + date
+                + " where _id = " + id;
+        db.execSQL(query);
+
+    } catch (Exception e) {
+        Log.e("\nError updateDB: ", e.getMessage());
+
+    }
+}
+
 }
