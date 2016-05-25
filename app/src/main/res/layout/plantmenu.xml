@@ -52,21 +52,22 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:padding="10dip"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp">
                     <Button
                         android:id="@+id/addPlantPhoto"
-                        android:layout_height="90dp"
+                        android:layout_height="75dp"
                         android:text="Add plant photo"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:layout_width="160dp"
                         android:layout_gravity="center"
                         android:background="@color/colorPrimary"
-                         />
+                        android:layout_marginBottom="10dp" />
 
                     <Button
                         android:id="@+id/button3"
-                        android:layout_height="90dp"
+                        android:layout_height="75dp"
                         android:text="Plant details"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
@@ -83,18 +84,18 @@
                     android:layout_height="wrap_content">
                     <Button
                         android:id="@+id/button2"
-                        android:layout_height="90dp"
+                        android:layout_height="75dp"
                         android:adjustViewBounds="true"
                         android:text="Next water date"
                         android:scaleType="fitCenter"
                         android:layout_width="160dp"
                         android:layout_gravity="center"
                         android:background="@color/colorPrimary"
-                         />
+                        android:layout_marginBottom="10dp" />
 
                     <Button
                         android:id="@+id/button4"
-                        android:layout_height="90dp"
+                        android:layout_height="75dp"
                         android:adjustViewBounds="true"
                         android:text="Growing History"
                         android:scaleType="fitCenter"

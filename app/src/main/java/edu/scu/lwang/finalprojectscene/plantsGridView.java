@@ -80,8 +80,10 @@ public class PlantsGridView extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
-        calendar.set(Calendar.MINUTE, 19);
+//        calendar.set(Calendar.HOUR_OF_DAY, 11);
+//        calendar.set(Calendar.MINUTE, 19);
+
+        calendar.setTime(new Date());
 
 
 

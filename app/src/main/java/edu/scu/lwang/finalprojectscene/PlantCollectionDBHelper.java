@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-
 import java.util.Hashtable;
-import java.util.Date;
 /**
  * Created by Sarah on 5/23/2016.
  */
@@ -58,7 +56,7 @@ public class PlantCollectionDBHelper extends SQLiteOpenHelper{
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Impatiens','http://www.homedepot.com/catalog/productImages/400/c6/c60b71b8-7b4c-4322-806b-8821d0e9e901_400.jpg',7,'full sun to 1/2 day shade','every 2 months','15-15-15 or 20-10-20','Spider mites, mealybugs, aphids, and thrips','From spring to fall')";
         db.execSQL(sql);
-        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Begonia','http://www.homedepot.com/catalog/productImages/400/50/50617389-8a5a-4fe2-b130-9b4cd6ca58e2_400.jpg',7,'part shade to shade','once a month from Feb to Sep','acid lover fertilizer','Mealy bug','From spring to fall')";
+        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('rose','http://www.homedepot.com/catalog/productImages/400/50/50617389-8a5a-4fe2-b130-9b4cd6ca58e2_400.jpg',7,'part shade to shade','once a month from Feb to Sep','acid lover fertilizer','Mealy bug','From spring to fall')";
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Lantana','http://www.homedepot.com/catalog/productImages/400/a1/a1a42570-e9fa-41d0-a3a9-2b91525ee2f9_400.jpg',7,'full sun to 1/2 day shade','Spring and mid summer','low PH fertilizer with sulfur','Whiteflies and Leaf Miner','From spring to fall')";
         db.execSQL(sql);
