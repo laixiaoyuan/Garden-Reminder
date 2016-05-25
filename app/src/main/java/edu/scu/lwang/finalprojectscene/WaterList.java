@@ -42,7 +42,7 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         cal.add(Calendar.DATE, -1);
         Date date = cal.getTime();
 
-        Plant pi = new Plant(111, "flowerName", "path", new Date(),2, new Date());
+        Plant pi = new Plant(111, "flowerName", "path", new Date(),2, date);
         dbHelper.add(pi);
 
         maxRecId = dbHelper.getMaxRecID();

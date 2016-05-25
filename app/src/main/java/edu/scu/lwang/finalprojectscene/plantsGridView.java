@@ -8,19 +8,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -162,6 +161,27 @@ public class plantsGridView extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
         //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_waterList:
+                Intent home = new Intent(plantsGridView.this,WaterList.class);
+                startActivity(home);
+                break;
+//            case R.id.home:
+//                Intent home = new Intent(MainActivity.this,ZooInfo.class);
+//                startActivity(home);
+//                break;
+            default:
+        }
+
+        return true;
     }
 
 

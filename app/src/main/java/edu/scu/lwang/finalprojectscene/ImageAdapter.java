@@ -63,7 +63,7 @@ public class ImageAdapter extends BaseAdapter {
             String plantPicPath= cursor.getString(2);
             int waterInterval = cursor.getInt(3);
             int lastWater = cursor.getInt(4);
-            int date = cursor.getInt(9);
+//            int date = cursor.getInt(9);
             //CREATE PLAYER
             Plant contactI= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
 
