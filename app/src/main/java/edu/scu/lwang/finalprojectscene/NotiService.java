@@ -39,7 +39,7 @@ public class NotiService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(NotiService.this)
-                        .setSmallIcon(R.drawable.flowericon)
+                        .setSmallIcon(R.drawable.flower2)
                         .setContentTitle("Garden Reminder")
                         .setContentText("A plant need to be watered!")
                         .setContentIntent(resultPendingIntent)
