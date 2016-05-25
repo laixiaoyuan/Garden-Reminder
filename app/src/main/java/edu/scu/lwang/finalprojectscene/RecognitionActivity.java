@@ -86,8 +86,7 @@ public class RecognitionActivity extends AppCompatActivity {
 
         outcomeDBHelper = new IdentifyOutcomeDBHelper(this);
         plantNameHash = collectionDBHelper.fetchPlantName();
-        cursor = outcomeDBHelper.fetchAll();
-
+        outcomeDBHelper.clearTable();
         acquireRunTimePermissions();
 
     }
@@ -216,7 +215,7 @@ public class RecognitionActivity extends AppCompatActivity {
 //                        plant.photoPath = plantNameHash.get(tagArraylist.get(i));
                         plant.photoPath = bitmapPath;
                         outcomeDBHelper.add(plant);
-                        cursor.requery();
+//                        cursor.requery();
                     }
 
                 }
