@@ -12,14 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".plantsGridView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".plantsGridView"/>
 
         <activity android:name=".PlantFrameName"/>
 
@@ -29,7 +35,6 @@
         <activity android:name=".IdentifyOutcome">
 
         </activity>
-
 
         <meta-data
             android:name="com.google.android.gms.version"

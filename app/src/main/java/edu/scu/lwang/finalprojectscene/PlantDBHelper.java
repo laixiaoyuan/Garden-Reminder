@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Hashtable;
 
 /**
  * Created by mingming on 5/9/16.
@@ -117,6 +119,56 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 
     }
 
+
+    public Hashtable<String, String> fetchPlantName() {
+        Hashtable<String, String> plantNameHash = new Hashtable<String, String>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String mypath = DB_Path + DB_NAME;
+//        SQLiteDatabase db = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+
+        Cursor cursor = fetchAll();
+        if (cursor.moveToFirst()) {
+            do {
+                plantNameHash.put(cursor.getString(cursor.getColumnIndex("plantName")), cursor.getString(cursor.getColumnIndex("photoPath")));
+            } while (cursor.moveToNext());
+        }
+        else {
+            return null;
+        }
+        return plantNameHash;
+    }
+
+    public Hashtable<String, Integer> fetchWaterInterval() {
+        Hashtable<String, Integer> plantWaterInterval = new Hashtable<String, Integer>();
+        Cursor cursor = fetchAll();
+        if (cursor.moveToFirst()) {
+            do {
+                plantWaterInterval.put(cursor.getString(cursor.getColumnIndex("plantName")), cursor.getInt(cursor.getColumnIndex("waterInterval")));
+            } while (cursor.moveToNext());
+        } else {
+            return null;
+        }
+        return plantWaterInterval;
+    }
+
+    public Plant fetchPlantWithId(int _id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        System.out.println("this is the id to get from fetching plant after touch: " + _id);
+        Cursor cursor = db.rawQuery("SELECT * FROM plant WHERE _id = ?;", new String[]{String.valueOf(_id)});
+        cursor.moveToFirst();
+
+        int id= cursor.getInt(0);
+        String plantName= cursor.getString(1);
+        String plantPicPath= cursor.getString(2);
+        int waterInterval = cursor.getInt(3);
+        int lastWater = cursor.getInt(4);
+        int date = cursor.getInt(9);
+
+        Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
+
+
+        return plant;
+    }
     public void delete(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete("plant", "_id=?", new String[]{String.valueOf(id)});
@@ -168,6 +220,7 @@ public void waterToday(int id) {
         Log.e("\nError updateDB: ", e.getMessage());
 
     }
+
 }
 
 }

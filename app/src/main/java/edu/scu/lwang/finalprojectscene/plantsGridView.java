@@ -53,7 +53,7 @@ public class plantsGridView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Plant p = (Plant) gridview.getAdapter().getItem(position);
-                Intent i = new Intent(plantsGridView.this, PlantMenu.class);
+                Intent i = new Intent(plantsGridView.this, RecognitionActivity.class);
                 System.out.println("this is the ID after touch in the plantsGridView: " + p.getId());
                 Bundle b = new Bundle();
                 b.putInt("_id", p.getId());
