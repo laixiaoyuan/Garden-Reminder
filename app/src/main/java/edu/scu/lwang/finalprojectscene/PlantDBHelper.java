@@ -9,10 +9,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.Calendar;
 
 /**
  * Created by mingming on 5/9/16.
@@ -68,6 +67,31 @@ public class PlantDBHelper extends SQLiteOpenHelper {
     public Cursor fetchAll() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM plant;", null);
+    }
+
+    public Cursor waterList(){
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            // arguments injected by manual string concatenation
+            Calendar cal = Calendar.getInstance(); // creates calendar
+            cal.add(Calendar.HOUR_OF_DAY, 3 * 24); // 3 days after today
+            long in3day = cal.getTimeInMillis();
+
+            String mySQL = " select *"
+                    + "   from plant "
+                    + "  where NextWater <= "  + in3day
+                    ;
+
+            Cursor c1 = db.rawQuery(mySQL, null);
+
+            return c1;
+
+        } catch (Exception e) {
+            Log.e("\nError: " , e.getMessage().toString());
+            return null;
+
+        }
+
     }
 
     public void add(Plant pi) {
@@ -127,4 +151,22 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 //        }
 //        return plantNameHash;
 //    }
+public void waterToday(int id) {
+    // action query performed using execSQL
+    // add 'XXX' to the name of person whose phone is 555-1111
+//        txtMsg.append("\n-updateDB");
+
+    try {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int date = (int) (Calendar.getInstance().getTimeInMillis());
+        String query = " update plant set lastWater =" + date
+                + " where _id = " + id;
+        db.execSQL(query);
+
+    } catch (Exception e) {
+        Log.e("\nError updateDB: ", e.getMessage());
+
+    }
+}
+
 }
