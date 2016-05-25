@@ -77,7 +77,7 @@ public class PlantDBHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // arguments injected by manual string concatenation
             Calendar cal = Calendar.getInstance(); // creates calendar
-            cal.add(Calendar.HOUR_OF_DAY, 3 * 24); // 3 days after today
+            cal.add(Calendar.HOUR_OF_DAY, 10 * 24); // 3 days after today
             long in3day = cal.getTimeInMillis();
 
             String mySQL = " select *"

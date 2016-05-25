@@ -4,17 +4,13 @@ import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -32,7 +28,7 @@ import java.util.Date;
  * Created by Sarah on 5/23/2016.
  */
 
-public class plantsGridView extends AppCompatActivity {
+public class PlantsGridView extends AppCompatActivity {
     final int notificationId = 1111;
 
     Context context;
@@ -55,7 +51,7 @@ public class plantsGridView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
               //  addNewPlant();
-                Intent intent=new Intent(plantsGridView.this, RecognitionActivity.class);
+                Intent intent=new Intent(PlantsGridView.this, RecognitionActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,13 +59,13 @@ public class plantsGridView extends AppCompatActivity {
         final GridView gridview = (GridView) findViewById(R.id.pgridview);
         gridview.setAdapter(new ImageAdapter(this));
 
-        System.out.println("got to tthe on create in plantsGridView");
+        System.out.println("got to tthe on create in PlantsGridView");
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Plant p = (Plant) gridview.getAdapter().getItem(position);
-                Intent i = new Intent(plantsGridView.this, PlantMenu.class);
-                System.out.println("this is the ID after touch in the plantsGridView: " + p.getId());
+                Intent i = new Intent(PlantsGridView.this, PlantMenu.class);
+                System.out.println("this is the ID after touch in the PlantsGridView: " + p.getId());
                 Bundle b = new Bundle();
                 b.putInt("_id", p.getId());
                 i.putExtras(b);
@@ -95,22 +91,25 @@ public class plantsGridView extends AppCompatActivity {
         Intent toReceiver = new Intent(this, ReminderReceiver.class);
 
         // create a pending intent to delay the intent until the reminder time
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(plantsGridView.this, 0, toReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(PlantsGridView.this, 0, toReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Set the remainder manager
         alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
+
+        acquireRunTimePermissions();
+
 
     }
 
 //    private void addNewPlant(){
 //        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
 //                "Cancel" };
-//        AlertDialog.Builder builder = new AlertDialog.Builder(plantsGridView.this);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(PlantsGridView.this);
 //        builder.setTitle("Add Photo!");
 //        builder.setItems(items, new DialogInterface.OnClickListener() {
 //            @Override
 //            public void onClick(DialogInterface dialog, int item) {
-//                //boolean result = Utility.checkPermission(plantsGridView.this);
+//                //boolean result = Utility.checkPermission(PlantsGridView.this);
 //                //System.out.println("hi i passed with " + result);
 //                if (items[item].equals("Take Photo")) {
 //                    userChoosenTask="Take Photo";
@@ -145,7 +144,7 @@ public class plantsGridView extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 1234 || resultCode != RESULT_OK) return;
 
-        Intent intent=new Intent(plantsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
+        Intent intent=new Intent(PlantsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
 
         Bundle bundle = new Bundle();
         bundle.putString("plantPicPath", fileName);
@@ -208,7 +207,7 @@ public class plantsGridView extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_waterList:
-                Intent home = new Intent(plantsGridView.this,WaterList.class);
+                Intent home = new Intent(PlantsGridView.this,WaterList.class);
                 startActivity(home);
                 break;
 //            case R.id.home:

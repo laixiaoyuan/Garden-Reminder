@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -61,7 +57,7 @@ public class PlantFrameName extends AppCompatActivity {
 
             Date date = new Date();
             PlantDBHelper db=new PlantDBHelper(this);
-            Intent intent=new Intent(PlantFrameName.this, plantsGridView.class);
+            Intent intent=new Intent(PlantFrameName.this, PlantsGridView.class);
             db.add(new Plant(0, plantName, plantPicPath, new Date(), 0, new Date()));
 
             startActivity(intent);

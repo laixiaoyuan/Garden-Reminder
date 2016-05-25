@@ -102,7 +102,7 @@ public class IdentifyOutcome extends AppCompatActivity implements AdapterView.On
 //        plantAdaptor.notifyDataSetChanged();
 
 
-        Intent intent = new Intent(IdentifyOutcome.this, MainActivity.class);
+        Intent intent = new Intent(IdentifyOutcome.this, PlantsGridView.class);
         startActivity(intent);
 
     }
