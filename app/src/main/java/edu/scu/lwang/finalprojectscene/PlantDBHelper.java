@@ -102,7 +102,7 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("PlantName", pi.plantName);
         contentValues.put("PhotoPath", pi.photoPath);
-        contentValues.put("WaterIntervel", pi.waterInterval);
+        contentValues.put("WaterInterval", pi.waterInterval);
         contentValues.put("LastWater", pi.lastWater.getTime());
         contentValues.put("NextWater", pi.nextWater.getTime());
 
