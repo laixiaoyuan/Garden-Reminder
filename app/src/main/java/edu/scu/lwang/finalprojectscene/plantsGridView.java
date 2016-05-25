@@ -53,7 +53,7 @@ public class plantsGridView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Plant p = (Plant) gridview.getAdapter().getItem(position);
-                Intent i = new Intent(plantsGridView.this, RecognitionActivity.class);
+                Intent i = new Intent(plantsGridView.this, PlantMenu.class);
                 System.out.println("this is the ID after touch in the plantsGridView: " + p.getId());
                 Bundle b = new Bundle();
                 b.putInt("_id", p.getId());
@@ -109,7 +109,7 @@ public class plantsGridView extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 1234 || resultCode != RESULT_OK) return;
 
-        Intent intent=new Intent(plantsGridView.this, PlantFrameName.class);
+        Intent intent=new Intent(plantsGridView.this, RecognitionActivity.class);//connect to xiaoyuan's recognition activity for image recognitions
 
         Bundle bundle = new Bundle();
         bundle.putString("plantPicPath", fileName);
