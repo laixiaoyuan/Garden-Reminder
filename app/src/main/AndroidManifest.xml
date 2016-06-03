@@ -40,6 +40,7 @@
         <service android:name=".NotiService" />
 
         <activity android:name=".WaterList"></activity>
+        <service android:name=".AlarmService"></service>
     </application>
 
 </manifest>
