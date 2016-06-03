@@ -62,6 +62,11 @@ public class IdentifyOutcomeDBHelper extends SQLiteOpenHelper{
         return db.rawQuery("SELECT * FROM outcome;", null);
     }
 
+    public void clearTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("outcome", null, null);
+    }
+
     public void add(Plant plant) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();

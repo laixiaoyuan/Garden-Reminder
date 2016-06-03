@@ -43,7 +43,7 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         Date date = cal.getTime();
 
         Plant pi = new Plant(111, "flowerName", "path", new Date(),2, date);
-        dbHelper.add(pi);
+//        dbHelper.add(pi);
 
         maxRecId = dbHelper.getMaxRecID();
 //        toastShow("MacRecID is " + maxRecId);

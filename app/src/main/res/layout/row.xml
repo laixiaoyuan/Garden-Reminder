@@ -34,7 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textView5"
-        android:textSize="18sp"
+        android:textSize="15dp"
         android:layout_marginLeft="25dp" />
 
     <!--<ImageButton-->

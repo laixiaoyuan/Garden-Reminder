@@ -31,6 +31,7 @@ import java.util.Date;
 public class PlantsGridView extends AppCompatActivity {
     final int notificationId = 1111;
 
+
     Context context;
     //    PendingIntent pendingIntent;
     AlarmManager alarm_manager;
@@ -50,7 +51,7 @@ public class PlantsGridView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  addNewPlant();
+                //  addNewPlant();
                 Intent intent=new Intent(PlantsGridView.this, RecognitionActivity.class);
                 startActivity(intent);
             }
@@ -80,8 +81,10 @@ public class PlantsGridView extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
-        calendar.set(Calendar.MINUTE, 19);
+//        calendar.set(Calendar.HOUR_OF_DAY, 11);
+//        calendar.set(Calendar.MINUTE, 19);
+
+        calendar.setTime(new Date());
 
 
 
@@ -222,3 +225,4 @@ public class PlantsGridView extends AppCompatActivity {
 
 
 }
+

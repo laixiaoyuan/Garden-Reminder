@@ -8,7 +8,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Gerden Reminder"
+        android:label="Garden Reminder"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
