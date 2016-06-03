@@ -15,10 +15,10 @@ public class ReminderReceiver extends BroadcastReceiver{
 //        create an intent to ringtone service
         Intent service_intent = new Intent(context, NotiService.class);
 
-        //start the ringtone service
+        //start the reminder service
         context.startService(service_intent);
 
-        // Creates an explicit intent for an Activity in your app
+        // Creates an explicit intent for an Activity
 
 
 
