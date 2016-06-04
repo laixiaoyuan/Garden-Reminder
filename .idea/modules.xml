@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Garden_reminder.iml" filepath="$PROJECT_DIR$/Garden_reminder.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/FinalProjectScene.iml" filepath="$PROJECT_DIR$/FinalProjectScene.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Garden_reminder_final.iml" filepath="$PROJECT_DIR$/Garden_reminder_final.iml" />
+>>>>>>> 4c1de76a1b151b9f74aab7f5f5af5962cba1a466
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

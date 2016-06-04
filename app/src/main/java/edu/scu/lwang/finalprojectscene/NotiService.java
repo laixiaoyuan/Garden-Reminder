@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -16,7 +15,6 @@ import android.widget.Toast;
  * Created by mingming on 5/20/16.
  */
 public class NotiService extends Service {
-    MediaPlayer media_song;
     final int notificationId = 1111;
 
     @Nullable
