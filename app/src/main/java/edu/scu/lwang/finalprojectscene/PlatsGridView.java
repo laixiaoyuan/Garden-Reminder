@@ -25,10 +25,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Sarah on 5/23/2016.
+ * Created by Sarahwang on 6/3/16.
  */
-
-public class PlantsGridView extends AppCompatActivity {
+public class PlatsGridView extends AppCompatActivity {
     final int notificationId = 1111;
 
 
@@ -52,7 +51,7 @@ public class PlantsGridView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //  addNewPlant();
-                Intent intent=new Intent(PlantsGridView.this, RecognitionActivity.class);
+                Intent intent=new Intent(PlatsGridView.this, RecognitionActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +64,7 @@ public class PlantsGridView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Plant p = (Plant) gridview.getAdapter().getItem(position);
-                Intent i = new Intent(PlantsGridView.this, PlantMenu.class);
+                Intent i = new Intent(PlatsGridView.this, PlantMenu.class);
                 System.out.println("this is the ID after touch in the PlantsGridView: " + p.getId());
                 Bundle b = new Bundle();
                 b.putInt("_id", p.getId());
@@ -94,7 +93,7 @@ public class PlantsGridView extends AppCompatActivity {
         Intent toReceiver = new Intent(this, ReminderReceiver.class);
 
         // create a pending intent to delay the intent until the reminder time
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(PlantsGridView.this, 0, toReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(PlatsGridView.this, 0, toReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Set the remainder manager
         alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
@@ -147,7 +146,7 @@ public class PlantsGridView extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 1234 || resultCode != RESULT_OK) return;
 
-        Intent intent=new Intent(PlantsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
+        Intent intent=new Intent(PlatsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
 
         Bundle bundle = new Bundle();
         bundle.putString("plantPicPath", fileName);
@@ -210,7 +209,7 @@ public class PlantsGridView extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_waterList:
-                Intent home = new Intent(PlantsGridView.this,WaterList.class);
+                Intent home = new Intent(PlatsGridView.this,WaterList.class);
                 startActivity(home);
                 break;
 //            case R.id.home:
@@ -225,4 +224,3 @@ public class PlantsGridView extends AppCompatActivity {
 
 
 }
-
