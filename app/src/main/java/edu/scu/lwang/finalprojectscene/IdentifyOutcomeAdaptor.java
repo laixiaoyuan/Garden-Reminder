@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,9 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Hashtable;
 
@@ -23,12 +28,16 @@ import java.util.Hashtable;
  */
 public class IdentifyOutcomeAdaptor extends CursorAdapter{
 
-    Hashtable<String, String> plantPhotoCollection = new Hashtable<String, String>();
+    ImageView img;
+    private Context mContext;
+
+
+    Hashtable<String, String> plantPhotoCollection= new Hashtable<String, String>();
 
     public IdentifyOutcomeAdaptor(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
     }
-    //update
+
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.outcome_namecard_layout, parent, false);
@@ -36,6 +45,9 @@ public class IdentifyOutcomeAdaptor extends CursorAdapter{
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
+        mContext = context;
+
         String plantName = cursor.getString(cursor.getColumnIndex("plantName"));
         String imageTakePath = cursor.getString(cursor.getColumnIndex("imageTakePath"));
 
@@ -47,6 +59,9 @@ public class IdentifyOutcomeAdaptor extends CursorAdapter{
 
 //        URL newurl = new URL(photoPath);
 //        Bitmap myIcaon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-        ((ImageView) view.findViewById(R.id.icon)).setImageURI(Uri.parse(plantPhotoPath));
+        img = (ImageView) view.findViewById(R.id.icon);
+        Picasso.with(mContext.getApplicationContext()).load(plantPhotoPath).into(img);
     }
+
+
 }

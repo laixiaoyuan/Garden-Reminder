@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "edu.scu.lwang.finalprojectscene"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -28,5 +28,5 @@ dependencies {
     compile 'com.android.support:design:23.3.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.clarifai:clarifai-api-java:1.2.0'
-
+    compile 'com.squareup.picasso:picasso:2.5.0'
 }
