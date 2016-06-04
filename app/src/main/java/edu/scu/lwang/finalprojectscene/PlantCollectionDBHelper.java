@@ -122,6 +122,15 @@ public class PlantCollectionDBHelper extends SQLiteOpenHelper{
         */
     }
 
+
+    public Cursor getAPlant(int recID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime FROM plantCollection WHERE _id=?;", new String[]{String.valueOf(recID)});
+    }
+
+
+
+
     public void delete(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete("contact", "_id=?", new String[]{String.valueOf(id)});

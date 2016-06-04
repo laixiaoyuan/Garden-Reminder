@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -55,6 +57,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
             bmImage.setImageBitmap(result);
         }
     }
+    PlantCollectionDBHelper cdb = new PlantCollectionDBHelper(this);
 
     PlantDBHelper db;
     final String myPreference = "wateve";
@@ -91,16 +94,25 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         Button addPlantPhotoB = (Button) findViewById(R.id.addPlantPhoto);
         addPlantPhotoB.setOnClickListener(this);
 
-        acquireRunTimePermissions();
-        button3.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+    button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("ID is " + id);
+//                Cursor another = cdb.fetchAll();
+//                while(another.moveToNext())
+//                {System.out.println("IDE is " + another.getInt(0));}
+                Cursor c = cdb.getAPlant(id);
+                c.moveToFirst();
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
                 builder.setIcon(R.mipmap.ic_launcher)
-                        .setTitle("Plant details")
-                        .setMessage("Sun tolerance: full sun" +
-                                "Water frequency: once a week" +
-                                "Hardiness zone: 7-10")
+                        .setTitle("Plant Details")
+                        .setMessage("Sun Tolerance: " + c.getString(0) + "\n" + "Fertilize Time: " + c.getString(1) + "\n" + "Fertilizer: " + c.getString(2) + "\n" + "Pest & Disease: " + c.getString(3) + "\n" + "Bloom Time: " + c.getString(4))
                         .setCancelable(true)
                 ;
                 builder.create().show();

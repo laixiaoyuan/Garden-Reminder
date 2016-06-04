@@ -93,7 +93,8 @@ public class ImageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
 
-//        Bitmap output = Bitmap.createBitmap(imageView.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+
+
 //        Canvas canvas = new Canvas();
 //        Paint paint = new Paint();
 //        Rect rect = new Rect(0, 0, imageView.getWidth(), imageView.getHeight());
@@ -101,7 +102,8 @@ public class ImageAdapter extends BaseAdapter {
             // if it's not recycled, initialize some attributes
 
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
+            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+
 //            canvas.drawARGB(0, 0, 0, 0);
 //            canvas.drawCircle(imageView.getWidth()/2, imageView.getHeight()/2, imageView.getWidth()/2, paint );
             imageView.setPadding(8, 8, 8, 8);
