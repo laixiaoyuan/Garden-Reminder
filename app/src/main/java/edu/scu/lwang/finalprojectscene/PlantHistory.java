@@ -57,7 +57,7 @@ public class PlantHistory extends AppCompatActivity {
 //        actionBar.setTitle("ActionBar demo");
 //        actionBar.setSubtitle("this is a demo");
 //        actionBar.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.action_bar_background));
-        actionBar.setIcon( R.mipmap.home);
+        actionBar.setIcon(R.mipmap.home);
 
 //        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
