@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
@@ -88,14 +89,14 @@ public class IdentifyOutcome extends AppCompatActivity implements AdapterView.On
 
         int waterInterval = waterIntervalHash.get(plantName);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
+        Format format = new SimpleDateFormat("MM/dd/yyyy");
         String plantNameDB = plantName;
         String photoPathDB = photoPath;
         Date lastWaterDB = date;
         int waterIntervalDB = waterInterval;
 
-        plant = new Plant(plantId, plantNameDB, photoPathDB, date.toString(), waterIntervalDB, lastWaterDB);
+        plant = new Plant(plantId, plantNameDB, photoPathDB, format.format(date), waterIntervalDB, lastWaterDB);
 //        plant.setId(plantId);
 //        plant.setPlantName(plantNameDB);
 //        plant.setPhotoPath(photoPathDB);
