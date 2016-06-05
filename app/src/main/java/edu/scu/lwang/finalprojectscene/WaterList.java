@@ -54,14 +54,6 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         maxRecId = dbHelper.getMaxRecID();
 //        toastShow("MacRecID is " + maxRecId);
 
-        ImageButton button4 = (ImageButton) findViewById(R.id.button4);
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(WaterList.this, PlatsGridView.class));
-            }
-        });
 
     }
 
