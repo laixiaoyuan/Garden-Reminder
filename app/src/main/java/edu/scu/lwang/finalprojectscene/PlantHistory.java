@@ -48,7 +48,6 @@ public class PlantHistory extends AppCompatActivity {
 
         System.out.println("got to the on create in PlantsGridView");
 
-
         ImageButton home = (ImageButton)findViewById(R.id.home);
 
         home.setOnClickListener(new View.OnClickListener() {
