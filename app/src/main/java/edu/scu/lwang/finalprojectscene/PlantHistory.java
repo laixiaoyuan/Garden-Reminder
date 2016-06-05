@@ -1,21 +1,13 @@
 package edu.scu.lwang.finalprojectscene;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -55,8 +47,11 @@ public class PlantHistory extends AppCompatActivity {
         gridview.setAdapter(new HistoryAdapter(this, plantHistoryName));
 
         System.out.println("got to the on create in PlantsGridView");
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9891c454be28cf6000fb0f4dcf0796fa3a9af2d1
 
         ImageButton home = (ImageButton)findViewById(R.id.home);
 
@@ -67,6 +62,7 @@ public class PlantHistory extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
 //Home button
 //        ImageButton button4 = (ImageButton) findViewById(R.id.button4);
 //
@@ -76,6 +72,12 @@ public class PlantHistory extends AppCompatActivity {
 //                startActivity(new Intent(WaterList.this, PlatsGridView.class));
 //            }
 //        });
+=======
+
+
+        calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+>>>>>>> 9891c454be28cf6000fb0f4dcf0796fa3a9af2d1
 
         //acquireRunTimePermissions();
     }

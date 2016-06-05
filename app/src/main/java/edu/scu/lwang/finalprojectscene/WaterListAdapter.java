@@ -47,7 +47,7 @@ public class WaterListAdapter extends CursorAdapter {
         tvWater.setText(waterDay);
 
         TextView tvDone = (TextView)view.findViewById(R.id.textView5);
-        tvDone.setText("Watered");
+        tvDone.setText("Water It!");
 
 //        BitmapFactory.Options optio
     }
