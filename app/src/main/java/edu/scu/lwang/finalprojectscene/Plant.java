@@ -9,30 +9,31 @@ import java.util.Date;
 
 public class Plant {
     protected int id;
-    protected String plantName;
-    protected String photoPath;
+    protected String plantName = "";
+    protected String photoPath = "";
     protected int waterInterval;
-    protected Date lastWater;
-    protected Date date;
-    Date nextWater;
+    protected String lastWater = "";
+    protected String date = "";
+    protected String nextWater = "";
 
     public Plant() {
 
     }
 
-    public Plant(int id, String plantName, String photoPath, Date date, int waterInterval, Date lastWater) {
+    public Plant(int id, String plantName, String photoPath, String date, int waterInterval, String lastWater) {
         this.id = id;
         this.plantName = plantName;
         this.photoPath = photoPath;
         this.waterInterval = waterInterval;
         this.lastWater = lastWater;
         this.date = date;
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-
-        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
-        nextWater = cal.getTime();
+//        this.date = date;
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date());
+//
+//        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
+//        nextWater = cal.getTime();
     }
 
     public String getPlantName() {
@@ -59,19 +60,19 @@ public class Plant {
         this.waterInterval = waterInterval;
     }
 
-    public Date getLastWater() {
+    public String getLastWater() {
         return lastWater;
     }
 
-    public void setLastWater(Date lastWater) {
+    public void setLastWater(String lastWater) {
         this.lastWater = lastWater;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

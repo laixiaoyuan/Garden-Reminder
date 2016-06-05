@@ -30,7 +30,8 @@ public class PlantDBHelper extends SQLiteOpenHelper {
                     "  PhotoPath TEXT," +
                     "  WaterInterval INTEGER," +
                     "  LastWater INTEGER," +
-                    "  NextWater INTEGER);";
+                    "  NextWater INTEGER," +
+                    "  date TEXT);";
 
     static private final String SQL_DROP_TABLE = "DROP TABLE plant";
 
@@ -109,9 +110,10 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("PlantName", pi.plantName);
         contentValues.put("PhotoPath", pi.photoPath);
-        contentValues.put("WaterInterval", pi.waterInterval);
-        contentValues.put("LastWater", pi.lastWater.getTime());
-        contentValues.put("NextWater", pi.nextWater.getTime());
+        contentValues.put("date",pi.date);
+//        contentValues.put("WaterInterval", pi.waterInterval);
+//        contentValues.put("LastWater", pi.lastWater.getTime());
+//        contentValues.put("NextWater", pi.nextWater.getTime());
 
         db.insert("plant", null, contentValues);
 
@@ -159,19 +161,21 @@ public class PlantDBHelper extends SQLiteOpenHelper {
     }
 
     public Plant fetchPlantWithId(int _id){
+
         SQLiteDatabase db = this.getReadableDatabase();
         System.out.println("this is the id to get from fetching plant after touch: " + _id);
-        Cursor cursor = db.rawQuery("SELECT * FROM plant WHERE _id = ?;", new String[]{String.valueOf(_id)});
+        Cursor cursor = db.rawQuery("SELECT _id, PlantName, PhotoPath, date FROM plant WHERE _id = ?;", new String[]{String.valueOf(_id)});
         cursor.moveToFirst();
 
         int id= cursor.getInt(0);
         String plantName= cursor.getString(1);
         String plantPicPath= cursor.getString(2);
-        int waterInterval = cursor.getInt(3);
-        int lastWater = cursor.getInt(4);
-      //  int date = cursor.getInt(9);
+        String date = cursor.getString(3);
 
-        Plant plant= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
+        Plant plant= new Plant();
+        plant.setPlantName(plantName);
+        plant.setPhotoPath(plantPicPath);
+        plant.setDate(date);
 
         return plant;
     }
@@ -179,13 +183,27 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete("plant", "_id=?", new String[]{String.valueOf(id)});
 
+
         /*
         String SQL_DELETE="DELETE FROM contact WHERE _id=" + id + ";";
         db.execSQL(SQL_DELETE);
          */
     }
 
-//    public Hashtable<String, String> fetchPlantName() {
+
+    /* Picture and a date for the query */
+
+    public Cursor getHistoryPlant(String plantName)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return db.rawQuery("SELECT PhotoPath, date FROM plant WHERE PlantName =? ", new String[]{plantName});
+
+    }
+
+
+
+    //    public Hashtable<String, String> fetchPlantName() {
 //        Hashtable<String, String> plantNameHash = new Hashtable<String, String>();
 //        SQLiteDatabase db = this.getReadableDatabase();
 //
@@ -210,23 +228,23 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 //        }
 //        return plantNameHash;
 //    }
-public void waterToday(int id) {
-    // action query performed using execSQL
-    // add 'XXX' to the name of person whose phone is 555-1111
+    public void waterToday(int id) {
+        // action query performed using execSQL
+        // add 'XXX' to the name of person whose phone is 555-1111
 //        txtMsg.append("\n-updateDB");
 
-    try {
-        SQLiteDatabase db = this.getReadableDatabase();
-        int date = (int) (Calendar.getInstance().getTimeInMillis());
-        String query = " update plant set lastWater =" + date
-                + " where _id = " + id;
-        db.execSQL(query);
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            int date = (int) (Calendar.getInstance().getTimeInMillis());
+            String query = " update plant set lastWater =" + date
+                    + " where _id = " + id;
+            db.execSQL(query);
 
-    } catch (Exception e) {
-        Log.e("\nError updateDB: ", e.getMessage());
+        } catch (Exception e) {
+            Log.e("\nError updateDB: ", e.getMessage());
+
+        }
 
     }
-
-}
 
 }

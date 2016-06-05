@@ -28,11 +28,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class PlantMenu extends AppCompatActivity implements View.OnClickListener{
+public class PlantMenu extends AppCompatActivity{
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
@@ -59,7 +61,7 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
     }
     PlantCollectionDBHelper cdb = new PlantCollectionDBHelper(this);
 
-    PlantDBHelper db;
+    PlantDBHelper db = new PlantDBHelper(this);
     final String myPreference = "wateve";
     SharedPreferences mySharedPreferences;
     SharedPreferences.Editor myEditor;
@@ -69,6 +71,10 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
     String fileName = "";
     int id;
     String userChoosenTask;
+    final int SELECT_FILE = 1;
+    private Bitmap bitmap;
+    String bitmapPath;
+    Plant plant;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +83,8 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("_id");
         System.out.println("this is _id after fetching it in PlantMenu: " + id);
-        PlantDBHelper db=new PlantDBHelper(this);
-        Plant plant = db.fetchPlantWithId(id);
+        //PlantDBHelper db=new PlantDBHelper(this);
+        plant = db.fetchPlantWithId(id);
 
         ImageView iv = (ImageView) findViewById(R.id.plantImage);
 
@@ -91,14 +97,19 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         }
 
         Button button3 = (Button) findViewById(R.id.button3);
+        Button button4 = (Button) findViewById(R.id.button4);
         Button addPlantPhotoB = (Button) findViewById(R.id.addPlantPhoto);
-        addPlantPhotoB.setOnClickListener(this);
+        addPlantPhotoB.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                addPlantPhotoTap();
+            }
+        });
+
+        acquireRunTimePermissions();
 
 
-
-
-
-    button3.setOnClickListener(new View.OnClickListener() {
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("ID is " + id);
@@ -112,13 +123,25 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
                 AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
                 builder.setIcon(R.mipmap.ic_launcher)
                         .setTitle("Plant Details")
-                        .setMessage("Sun Tolerance: " + c.getString(0) + "\n" + "Fertilize Time: " + c.getString(1) + "\n" + "Fertilizer: " + c.getString(2) + "\n" + "Pest & Disease: " + c.getString(3) + "\n" + "Bloom Time: " + c.getString(4))
+                        .setMessage("Sun Tolerance: " + c.getString(1) + "\n" + "Fertilize Time: " + c.getString(2) + "\n" + "Fertilizer: " + c.getString(3) + "\n" + "Pest & Disease: " + c.getString(4) + "\n" + "Bloom Time: " + c.getString(5))
                         .setCancelable(true)
                 ;
                 builder.create().show();
             }
         });
 
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PlantMenu.this, PlantHistory.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("plantHistoryName", plant.getPlantName());
+                intent.putExtras(bundle);
+                // System.out.println("Waht is the PlantName"+ plant.getPlantName());
+                startActivity(intent);
+            }
+        });
 
         Button button2 = (Button) findViewById(R.id.button2);
         //------------------->Mingming put code here to appear the next water date
@@ -151,32 +174,31 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
 //
 //
 //        mySharedPreferences = getSharedPreferences(myPreference, Activity.MODE_PRIVATE);
-    @Override
-    public void onClick(View v) {
 
-        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
-                "Cancel" };
+    public void addPlantPhotoTap() {
+        System.out.println("got to addPlantPhotoTap!!!");
+
+        final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(PlantMenu.this);
         builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        builder.setItems(items, new android.content.DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                //boolean result = Utility.checkPermission(PlatsGridView.this);
-                //System.out.println("hi i passed with " + result);
+                boolean result = Utility.checkPermission(PlantMenu.this);
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask="Take Photo";
-                    //   if(result)
-                    cameraIntent();
-                } else if (items[item].equals("Choose from Gallery")) {
-                    userChoosenTask="Choose from Gallery";
-                    //   if(result)
-                    galleryIntent();
+                    userChoosenTask = "Take Photo";
+                    if (result)
+                        cameraIntent();
+                } else if (items[item].equals("Choose from Library")) {
+                    userChoosenTask = "Choose from Library";
+                    if (result)
+                        galleryIntent();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
             }
         });
-
+        builder.show();
     }
 
     private void cameraIntent(){
@@ -194,21 +216,44 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != 2345 || resultCode != RESULT_OK) return;
+        // if (requestCode != 2345 || resultCode != RESULT_OK) return;
 
-        Intent intent=new Intent(PlantMenu.this, PlantMenu.class);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
+                onSelectFromGalleryResult(data);
+                fileName = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
+            }else{
+                fileName = Uri.parse(fileName).getPath();
+            }
+        }
+        Plant p = new Plant();
+//        Cursor c = cdb.getAPlant(id);
+//        c.moveToFirst();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("plantPicPath", fileName);
-        System.out.println("THIS IS THE PATH: " + fileName);
-        intent.putExtras(bundle);
+        p.setPlantName(plant.getPlantName());
 
-        startActivity(intent);
-//        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//        imageView.setImageURI(Uri.parse(fileName));
-//        imageView.setRotation(180f);
+        // System.out.println("FlowerSSS" + c.getString(0));
+        p.setPhotoPath(fileName);
+
+        String current_date = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+        p.setDate(current_date);
+
+        db.add(p);
+
     }
 
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+        bitmap = null;
+        if (data != null) {
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private String getOutputFileName() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
@@ -242,12 +287,13 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
     private void galleryIntent()
     {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
     }
+
+
 }

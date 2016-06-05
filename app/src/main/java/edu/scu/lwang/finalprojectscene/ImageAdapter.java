@@ -13,18 +13,23 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private LayoutInflater layoutinflater;//?
+    private List<GridItem> listStorage;
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
@@ -53,7 +58,9 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c) {
         mContext = c;
-        mThumbIds = new ArrayList<Plant>();
+        //mThumbIds = new ArrayList<Plant>();
+        listStorage = new ArrayList<GridItem>();
+        layoutinflater =(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         PlantDBHelper dbHelper = new PlantDBHelper(mContext);
         Cursor cursor = dbHelper.fetchAll();
@@ -64,24 +71,33 @@ public class ImageAdapter extends BaseAdapter {
             int id= cursor.getInt(0);
             String plantName= cursor.getString(1);
             String plantPicPath= cursor.getString(2);
-            int waterInterval = cursor.getInt(3);
-            int lastWater = cursor.getInt(4);
-//            int date = cursor.getInt(9);
+            String date = cursor.getString(6);
+            System.out.println("this is imageAdapter => date = " + date + " ID = " + id);
+
             //CREATE PLAYER
-            Plant contactI= new Plant(id, plantName, plantPicPath, new Date(), 0, new Date());
+            Plant p= new Plant();
+            p.setId(id);
+            p.setPlantName(plantName);
+            p.setPhotoPath(plantPicPath);
+            p.setDate(date);
+
+
+
+            GridItem gi = new GridItem(plantName, plantPicPath, p);
+            listStorage.add(gi);
 
             //ADD TO PLAYERS
-            mThumbIds.add(contactI);
+            //mThumbIds.add(p);
         }
     }
 
     public int getCount() {
-        return mThumbIds.size();
+        return listStorage.size();
         //return mThumbIds.length;
     }
 
     public Object getItem(int position) {
-        return mThumbIds.get(position);
+        return listStorage.get(position).getPlant();
         //return null;
     }
 
@@ -91,7 +107,7 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ViewHolder listViewHolder;
 
 
 
@@ -100,58 +116,45 @@ public class ImageAdapter extends BaseAdapter {
 //        Rect rect = new Rect(0, 0, imageView.getWidth(), imageView.getHeight());
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
+            listViewHolder = new ViewHolder();
+            convertView = layoutinflater.inflate(R.layout.grid_item_layout, parent, false);
+            listViewHolder.textInListView = (TextView) convertView.findViewById(R.id.textView);
+            listViewHolder.imageInListView = (ImageView) convertView.findViewById(R.id.imageView);
+            convertView.setTag(listViewHolder);
 
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-
-//            canvas.drawARGB(0, 0, 0, 0);
-//            canvas.drawCircle(imageView.getWidth()/2, imageView.getHeight()/2, imageView.getWidth()/2, paint );
-            imageView.setPadding(8, 8, 8, 8);
+//            imageView = new ImageView(mContext);
+//            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+//
+////            canvas.drawARGB(0, 0, 0, 0);
+////            canvas.drawCircle(imageView.getWidth()/2, imageView.getHeight()/2, imageView.getWidth()/2, paint );
+//            imageView.setPadding(8, 8, 8, 8);
         } else {
-            imageView = (ImageView) convertView;
+            listViewHolder = (ViewHolder)convertView.getTag();
         }
         //imageView.setImageResource(mThumbIds[position]);
 
-        System.out.println("Before creating pic " + mThumbIds.get(position).getPhotoPath());
-        if(mThumbIds.get(position).getPhotoPath().charAt(0) == 'h'){
-            new DownloadImageTask(imageView)
-                    .execute(mThumbIds.get(position).getPhotoPath());
-
+        //System.out.println("Before creating pic " + mThumbIds.get(position).getPhotoPath());
+        if(listStorage.get(position).getPlant().getPhotoPath().charAt(0) == 'h'){
+            new DownloadImageTask(listViewHolder.imageInListView)
+                    .execute(listStorage.get(position).getPlant().getPhotoPath());
         }else{
-            imageView.setImageURI(Uri.parse(mThumbIds.get(position).getPhotoPath()));
+            listViewHolder.imageInListView.setImageURI(Uri.parse(listStorage.get(position).getPlant().getPhotoPath()));
         }
+        listViewHolder.textInListView.setText(listStorage.get(position).getPlant().getPlantName());
+
+
 
         System.out.println("After creating pic");
 
-        return imageView;
+        return convertView;
     }
 
-//    private Integer[] mThumbIds = {
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7,
-//            R.drawable.sample_0, R.drawable.sample_1,
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7,
-//            R.drawable.sample_0, R.drawable.sample_1,
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7
-//    };
+    static class ViewHolder{
+        TextView textInListView;
+        ImageView imageInListView;
+    }
 
     // references to our images
-    private ArrayList<Plant> mThumbIds; //= {
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7,
-//            R.drawable.sample_0, R.drawable.sample_1,
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7,
-//            R.drawable.sample_0, R.drawable.sample_1,
-//            R.drawable.sample_2, R.drawable.sample_3,
-//            R.drawable.sample_4, R.drawable.sample_5,
-//            R.drawable.sample_6, R.drawable.sample_7
-    // };
+    //private ArrayList<Plant> mThumbIds;
+
 }

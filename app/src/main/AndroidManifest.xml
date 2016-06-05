@@ -24,7 +24,7 @@
         <activity android:name=".PlantFrameName"/>
 
         <activity android:name=".PlantMenu"/>
-
+        <activity android:name=".PlantHistory"/>
         <activity android:name=".RecognitionActivity" />
         <activity android:name=".IdentifyOutcome">
 

@@ -48,7 +48,7 @@ public class IdentifyOutcome extends AppCompatActivity implements AdapterView.On
     Hashtable<String, Integer> waterIntervalHash;
     ListView list;
     Plant plant;
-//    String plantName;
+    //    String plantName;
 //    String photoPath;
 //    Date lastWater;
 //    int waterInterval;
@@ -88,14 +88,19 @@ public class IdentifyOutcome extends AppCompatActivity implements AdapterView.On
 
         int waterInterval = waterIntervalHash.get(plantName);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String plantNameDB = plantName;
         String photoPathDB = photoPath;
         Date lastWaterDB = date;
         int waterIntervalDB = waterInterval;
 
-        plant = new Plant(plantId, plantNameDB, photoPathDB, date, waterIntervalDB, lastWaterDB);
+        plant = new Plant();
+        plant.setId(plantId);
+        plant.setPlantName(plantNameDB);
+        plant.setPhotoPath(photoPathDB);
+        plant.setDate(date.toString());
+        plant.setWaterInterval(waterInterval);
 
         plantDBHelper.add(plant);
         plantCursor.requery();
