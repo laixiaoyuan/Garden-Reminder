@@ -1,36 +1,46 @@
 package edu.scu.lwang.finalprojectscene;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
-import java.sql.Date;
+import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PlantMenu extends AppCompatActivity implements View.OnClickListener{
+
+//    PlantDBHelper db;
+    final String myPreference = "wateve";
+    SharedPreferences mySharedPreferences;
+    SharedPreferences.Editor myEditor;
+
+    final int requestCode = 1234;
+    final String albumName = "L11-camera-external-file";
+    String fileName = "";
+    int id;
+    String userChoosenTask;
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
@@ -56,25 +66,15 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    PlantDBHelper db;
-    final String myPreference = "wateve";
-    SharedPreferences mySharedPreferences;
-    SharedPreferences.Editor myEditor;
 
-    final int requestCode = 1234;
-    final String albumName = "L11-camera-external-file";
-    String fileName = "";
-    int id;
-    String userChoosenTask;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plantmenu);
+        final Bundle bundle = getIntent().getExtras();
 
-        Bundle bundle = getIntent().getExtras();
-        id = bundle.getInt("_id");
         System.out.println("this is _id after fetching it in PlantMenu: " + id);
-        PlantDBHelper db=new PlantDBHelper(this);
+        final PlantDBHelper db=new PlantDBHelper(this);
         Plant plant = db.fetchPlantWithId(id);
 
         ImageView iv = (ImageView) findViewById(R.id.plantImage);
@@ -112,22 +112,26 @@ public class PlantMenu extends AppCompatActivity implements View.OnClickListener
         //------------------->Mingming put code here to appear the next water date
         //
         //
-//        button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
-//                //    db = new dbHelper(this);
-//                //    cursor = db.fetchAll();
-//
-//                builder.setIcon(R.mipmap.ic_launcher)
-//                        .setTitle("Next Watering date")
-//                        .setMessage("May 5, 2016")
-//                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
-//                        .setCancelable(true)
-//                ;
-//                builder.create().show();
-//            }
-//        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
+                int id = bundle.getInt("_id");
+                Cursor cursor = db.getPlant(id);
+                cursor.moveToFirst();
+                Date date = new Date(cursor.getLong(cursor.getColumnIndex("NextWater")));
+                Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//                format.format(date);
+                builder.setIcon(R.mipmap.ic_launcher)
+                        .setTitle("Next Watering date")
+                        .setMessage(format.format(date)
+                        )
+                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
+                        .setCancelable(true)
+                ;
+                builder.create().show();
+            }
+        });
 
     }
     //        button3.setOnClickListener(new View.OnClickListener() {

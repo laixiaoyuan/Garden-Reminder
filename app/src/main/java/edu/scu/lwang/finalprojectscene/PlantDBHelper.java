@@ -99,10 +99,12 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 
     public Cursor getPlant(int recID){
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(" select Latitude, Longitude, " + "RecordPath"+
-                " from photo " +
+        return db.rawQuery(" select NextWater, PlantName" +
+                " from plant " +
                 " where _id = " + recID, null);
     }
+
+
 
     public void add(Plant pi) {
         SQLiteDatabase db = this.getReadableDatabase();
