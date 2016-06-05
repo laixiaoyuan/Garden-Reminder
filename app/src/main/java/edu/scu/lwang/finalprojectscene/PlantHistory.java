@@ -34,6 +34,7 @@ public class PlantHistory extends AppCompatActivity {
     Calendar calendar;
 //    ArrayList<Calendar> calList = new ArrayList<>();
 
+
     String fileName;
     String userChoosenTask;
     TextView plantNameText;
@@ -42,6 +43,7 @@ public class PlantHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.context = this;
         setContentView(R.layout.planthistory);
+
 
         Bundle bundle = getIntent().getExtras();
         plantHistoryName = bundle.getString("plantHistoryName");
@@ -53,24 +55,16 @@ public class PlantHistory extends AppCompatActivity {
         gridview.setAdapter(new HistoryAdapter(this, plantHistoryName));
 
         System.out.println("got to the on create in PlantsGridView");
-        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("ActionBar demo");
-//        actionBar.setSubtitle("this is a demo");
-//        actionBar.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.action_bar_background));
-        actionBar.setIcon( R.mipmap.home);
 
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-//Home button
-//        ImageButton button4 = (ImageButton) findViewById(R.id.button4);
-//
-//        button4.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                finish();
-//                startActivity(new Intent(WaterList.this, PlatsGridView.class));
-//            }
-//        });
+
+        ImageButton home = (ImageButton)findViewById(R.id.home);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                startActivity(new Intent(PlantHistory.this, PlatsGridView.class));
+            }
+        });
 
 
         calendar = Calendar.getInstance();
@@ -79,37 +73,6 @@ public class PlantHistory extends AppCompatActivity {
         //acquireRunTimePermissions();
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-//            case R.id.action_search:
-//                toast("Search action ...");
-//                break;
-//            case R.id.action_share:
-//                toast("Share action ...");
-//                break;
-//            case R.id.action_download:
-//                toast("Download action ...");
-//                break;
-//            case R.id.action_settings:
-//                toast("Settings action ...");
-//                break;
-//            case R.id.action_about:
-//                toast("About action ...");
-//                break;
-            case android.R.id.home:
-                Intent intent = new Intent();
-                startActivity(new Intent(PlantHistory.this, PlatsGridView.class));
-                break;
-            default:
-                toast("unknown action ...");
-        }
-        return true;
-    }
-
-    private void toast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    }
 
 
 }
