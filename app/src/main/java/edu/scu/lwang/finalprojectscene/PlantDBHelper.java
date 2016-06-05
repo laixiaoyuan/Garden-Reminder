@@ -88,9 +88,10 @@ public class PlantDBHelper extends SQLiteOpenHelper {
             cal.add(Calendar.HOUR_OF_DAY, 10 * 24); // 3 days after today
             long in3day = cal.getTimeInMillis();
 
-            String mySQL = " select *"
+            String mySQL = "select min(_id) as _id, PlantName, PhotoPath, NextWater"
                     + "   from plant "
                     + "  where NextWater <= "  + in3day
+                    + " GROUP BY PlantName "
                     ;
 
             Cursor c1 = db.rawQuery(mySQL, null);
