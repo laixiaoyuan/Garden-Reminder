@@ -28,11 +28,13 @@
             android:layout_alignParentLeft="true" />
 
         <ImageView
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/icon"
             android:layout_alignParentBottom="false"
-            android:layout_below="@+id/txtNote" />
+            android:layout_below="@+id/txtNote"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
