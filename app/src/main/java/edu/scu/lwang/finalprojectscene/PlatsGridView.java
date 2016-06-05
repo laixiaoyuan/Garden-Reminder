@@ -223,5 +223,4 @@ public class PlatsGridView extends AppCompatActivity {
         return true;
     }
 
-
 }

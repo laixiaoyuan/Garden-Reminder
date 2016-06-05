@@ -187,6 +187,26 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 
         return plant;
     }
+
+
+    public Plant fetchPlantWithIdFor(int _id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        System.out.println("this is the id to get from fetching plant after touch: " + _id);
+        Cursor cursor = db.rawQuery("SELECT * FROM plant WHERE _id = ?;", new String[]{String.valueOf(_id)});
+        cursor.moveToFirst();
+
+        int id= cursor.getInt(0);
+        String plantName= cursor.getString(1);
+        String plantPicPath= cursor.getString(2);
+        int waterInterval = cursor.getInt(3);
+        int lastWater = cursor.getInt(4);
+        //  int date = cursor.getInt(9);
+//public Plant(int id, String plantName, String photoPath, String date, int waterInterval, Date lastWater)
+        Plant plant= new Plant(id, plantName, plantPicPath, null, 0, new Date());
+
+        return plant;
+    }
+
     public void delete(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete("plant", "_id=?", new String[]{String.valueOf(id)});

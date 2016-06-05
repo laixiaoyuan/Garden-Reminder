@@ -30,7 +30,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
+import java.util.Date;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -144,25 +145,24 @@ public class PlantMenu extends AppCompatActivity{
         });
 
         Button button2 = (Button) findViewById(R.id.button2);
-        //------------------->Mingming put code here to appear the next water date
-        //
-        //
-//        button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
-//                //    db = new dbHelper(this);
-//                //    cursor = db.fetchAll();
-//
-//                builder.setIcon(R.mipmap.ic_launcher)
-//                        .setTitle("Next Watering date")
-//                        .setMessage("May 5, 2016")
-//                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
-//                        .setCancelable(true)
-//                ;
-//                builder.create().show();
-//            }
-//        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date;
+                AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
+                Plant plant = db.fetchPlantWithIdFor(id);
+                date = plant.nextWater;
+                Format format = new SimpleDateFormat("MM dd yyyy");
+//                format.format(date);
+                builder.setIcon(R.mipmap.ic_launcher)
+                        .setTitle("Next Watering date")
+                        .setMessage(format.format(date))
+                        //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
+                        .setCancelable(true)
+                ;
+                builder.create().show();
+            }
+        });
 
     }
     //        button3.setOnClickListener(new View.OnClickListener() {
