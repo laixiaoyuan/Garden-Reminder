@@ -73,6 +73,13 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM plant;", null);
     }
 
+
+    public Cursor fetchFirstOcurrences(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT min(_id) as _id, PlantName, PhotoPath, date FROM plant GROUP BY PlantName;", null);
+    }
+
+
     public Cursor waterList(){
         try {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -111,9 +118,9 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         contentValues.put("PlantName", pi.plantName);
         contentValues.put("PhotoPath", pi.photoPath);
         contentValues.put("date",pi.date);
-//        contentValues.put("WaterInterval", pi.waterInterval);
-//        contentValues.put("LastWater", pi.lastWater.getTime());
-//        contentValues.put("NextWater", pi.nextWater.getTime());
+        contentValues.put("WaterInterval", pi.waterInterval);
+        contentValues.put("LastWater", pi.lastWater.getTime());
+        contentValues.put("NextWater", pi.nextWater.getTime());
 
         db.insert("plant", null, contentValues);
 
@@ -172,10 +179,11 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         String plantPicPath= cursor.getString(2);
         String date = cursor.getString(3);
 
-        Plant plant= new Plant();
-        plant.setPlantName(plantName);
-        plant.setPhotoPath(plantPicPath);
-        plant.setDate(date);
+
+        Plant plant= new Plant(id, plantName, plantPicPath, date, 0, new Date());
+//        plant.setPlantName(plantName);
+//        plant.setPhotoPath(plantPicPath);
+//        plant.setDate(date);
 
         return plant;
     }

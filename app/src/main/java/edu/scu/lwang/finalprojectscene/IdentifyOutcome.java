@@ -95,12 +95,12 @@ public class IdentifyOutcome extends AppCompatActivity implements AdapterView.On
         Date lastWaterDB = date;
         int waterIntervalDB = waterInterval;
 
-        plant = new Plant();
-        plant.setId(plantId);
-        plant.setPlantName(plantNameDB);
-        plant.setPhotoPath(photoPathDB);
-        plant.setDate(date.toString());
-        plant.setWaterInterval(waterInterval);
+        plant = new Plant(plantId, plantNameDB, photoPathDB, date.toString(), waterIntervalDB, lastWaterDB);
+//        plant.setId(plantId);
+//        plant.setPlantName(plantNameDB);
+//        plant.setPhotoPath(photoPathDB);
+//        plant.setDate(date.toString());
+//        plant.setWaterInterval(waterInterval);
 
         plantDBHelper.add(plant);
         plantCursor.requery();

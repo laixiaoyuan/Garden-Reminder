@@ -226,17 +226,20 @@ public class PlantMenu extends AppCompatActivity{
                 fileName = Uri.parse(fileName).getPath();
             }
         }
-        Plant p = new Plant();
+        String current_date = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+        Plant p = new Plant(plant.getId(),plant.getPlantName(),fileName, current_date, 0, new java.util.Date());
 //        Cursor c = cdb.getAPlant(id);
 //        c.moveToFirst();
 
-        p.setPlantName(plant.getPlantName());
+//        p.setPlantName(plant.getPlantName());
+//
+//        // System.out.println("FlowerSSS" + c.getString(0));
+//        p.setPhotoPath(fileName);
+//
+//        String current_date = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
+//        p.setDate(current_date);
 
-        // System.out.println("FlowerSSS" + c.getString(0));
-        p.setPhotoPath(fileName);
 
-        String current_date = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
-        p.setDate(current_date);
 
         db.add(p);
 

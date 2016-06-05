@@ -59,12 +59,14 @@ public class PlantFrameName extends AppCompatActivity {
             Date date = new Date();
             PlantDBHelper db=new PlantDBHelper(this);
             Intent intent=new Intent(PlantFrameName.this, PlatsGridView.class);
-            Plant p = new Plant();
-            p.setPlantName(plantName);
-            p.setPhotoPath(plantPicPath);
+//            Plant p = new Plant(0, plantName, plantPicPath, current_date, 0, new Date());
+//            p.setPlantName(plantName);
+//            p.setPhotoPath(plantPicPath);
 
             String current_date = new SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date());
-            p.setDate(current_date);
+            Plant p = new Plant(0, plantName, plantPicPath, current_date, 0, new Date());
+
+//            p.setDate(current_date);
 
             db.add(p);
 

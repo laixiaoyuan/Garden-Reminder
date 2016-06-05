@@ -12,15 +12,15 @@ public class Plant {
     protected String plantName = "";
     protected String photoPath = "";
     protected int waterInterval;
-    protected String lastWater = "";
+    protected Date lastWater;
     protected String date = "";
-    protected String nextWater = "";
+    protected Date nextWater;
 
     public Plant() {
 
     }
 
-    public Plant(int id, String plantName, String photoPath, String date, int waterInterval, String lastWater) {
+    public Plant(int id, String plantName, String photoPath, String date, int waterInterval, Date lastWater) {
         this.id = id;
         this.plantName = plantName;
         this.photoPath = photoPath;
@@ -29,11 +29,11 @@ public class Plant {
         this.date = date;
 //        this.date = date;
 //
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(new Date());
-//
-//        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
-//        nextWater = cal.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+
+        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
+        nextWater = cal.getTime();
     }
 
     public String getPlantName() {
@@ -60,11 +60,11 @@ public class Plant {
         this.waterInterval = waterInterval;
     }
 
-    public String getLastWater() {
+    public Date getLastWater() {
         return lastWater;
     }
 
-    public void setLastWater(String lastWater) {
+    public void setLastWater(Date lastWater) {
         this.lastWater = lastWater;
     }
 

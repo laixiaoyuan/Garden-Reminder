@@ -103,7 +103,7 @@ public class PlatsGridView extends AppCompatActivity {
 
         //acquireRunTimePermissions();
     }
-//
+    //
 ////    private void addNewPlant(){
 ////        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
 ////                "Cancel" };
@@ -194,17 +194,17 @@ public class PlatsGridView extends AppCompatActivity {
 //
 //
 //
-//    private void galleryIntent()
-//    {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);//
-//        //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
-//    }
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
-//    }
+    private void galleryIntent()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

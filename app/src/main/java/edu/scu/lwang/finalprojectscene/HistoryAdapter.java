@@ -43,7 +43,7 @@ public class HistoryAdapter extends BaseAdapter {
         // Cursor cursor = dbHelper.fetchAll();
 
         Cursor cursor = dbHelper.getHistoryPlant(nameOfPlant);
-
+        //imageInListView.setRotation(90f);
         while (cursor.moveToNext())
         {
 
@@ -89,6 +89,7 @@ public class HistoryAdapter extends BaseAdapter {
             convertView = layoutinflater.inflate(R.layout.history_item_layout, parent, false);
             listViewHolder.textInListView = (TextView) convertView.findViewById(R.id.textView);
             listViewHolder.imageInListView = (ImageView) convertView.findViewById(R.id.imageView);
+
             convertView.setTag(listViewHolder);
 
         } else {
@@ -100,7 +101,7 @@ public class HistoryAdapter extends BaseAdapter {
 //                    .execute(listStorage.get(position).getPlant().getPhotoPath());
 //        }else{
         listViewHolder.imageInListView.setImageURI(Uri.parse(listStorage.get(position).getPlant().getPhotoPath()));
-        // }
+
         listViewHolder.textInListView.setText(listStorage.get(position).getPlant().getDate());
 
         System.out.println("After creating pic");
@@ -111,6 +112,7 @@ public class HistoryAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView textInListView;
         ImageView imageInListView;
+
     }
 
 

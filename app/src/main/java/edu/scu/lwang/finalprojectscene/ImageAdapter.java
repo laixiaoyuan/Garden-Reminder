@@ -63,7 +63,7 @@ public class ImageAdapter extends BaseAdapter {
         layoutinflater =(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         PlantDBHelper dbHelper = new PlantDBHelper(mContext);
-        Cursor cursor = dbHelper.fetchAll();
+        Cursor cursor = dbHelper.fetchFirstOcurrences();
 
         while (cursor.moveToNext())
         {
@@ -71,15 +71,15 @@ public class ImageAdapter extends BaseAdapter {
             int id= cursor.getInt(0);
             String plantName= cursor.getString(1);
             String plantPicPath= cursor.getString(2);
-            String date = cursor.getString(6);
+            String date = cursor.getString(3);
             System.out.println("this is imageAdapter => date = " + date + " ID = " + id);
 
             //CREATE PLAYER
-            Plant p= new Plant();
-            p.setId(id);
-            p.setPlantName(plantName);
-            p.setPhotoPath(plantPicPath);
-            p.setDate(date);
+            Plant p= new Plant(id, plantName, plantPicPath, date, 0, new Date());
+//            p.setId(id);
+//            p.setPlantName(plantName);
+//            p.setPhotoPath(plantPicPath);
+//            p.setDate(date);
 
 
 

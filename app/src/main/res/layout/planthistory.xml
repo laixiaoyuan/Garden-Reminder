@@ -12,33 +12,29 @@
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/historygridview"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="420dp"
         android:columnWidth="135dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-
-        android:layout_alignParentBottom="true" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_below="@+id/plantTextName"
+        android:layout_marginTop="10dp" />
 
-    <EditText
-        android:layout_width="140dp"
-        android:layout_height="20dp"
-        android:id="@+id/plantNameText"
-        android:layout_above="@+id/pgridview"
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:text="New Text"
+        android:id="@+id/plantTextName"
+        android:singleLine="true"
+        android:textAlignment="inherit"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

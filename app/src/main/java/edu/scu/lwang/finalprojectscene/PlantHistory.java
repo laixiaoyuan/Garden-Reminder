@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,6 +32,7 @@ public class PlantHistory extends AppCompatActivity {
 
     String fileName;
     String userChoosenTask;
+    TextView plantNameText;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +42,13 @@ public class PlantHistory extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         plantHistoryName = bundle.getString("plantHistoryName");
         // System.out.println("printsth");
-
+        plantNameText = (TextView) findViewById(R.id.plantTextName);
+        //assert plantNameText != null;
+        plantNameText.setText(plantHistoryName);
         final GridView gridview = (GridView) findViewById(R.id.historygridview);
         gridview.setAdapter(new HistoryAdapter(this, plantHistoryName));
 
         System.out.println("got to the on create in PlantsGridView");
-
 
         calendar = Calendar.getInstance();
         calendar.setTime(new Date());

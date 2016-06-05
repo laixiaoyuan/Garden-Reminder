@@ -43,13 +43,13 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         cal.add(Calendar.DATE, -1);
         Date date = cal.getTime();
 
-        Plant pi = new Plant();
-        pi.setId(111);
-        pi.setPlantName("flowerName");
-        pi.setPhotoPath("path");
-        pi.setWaterInterval(2);
-        pi.setDate(date.toString());
-        dbHelper.add(pi);
+        Plant pi = new Plant(111, "flowerName", "path", date.toString(), 2, date);
+//        pi.setId(111);
+//        pi.setPlantName("flowerName");
+//        pi.setPhotoPath("path");
+//        pi.setWaterInterval(2);
+//        pi.setDate(date.toString());
+        //   dbHelper.add(pi);
 
         maxRecId = dbHelper.getMaxRecID();
 //        toastShow("MacRecID is " + maxRecId);
