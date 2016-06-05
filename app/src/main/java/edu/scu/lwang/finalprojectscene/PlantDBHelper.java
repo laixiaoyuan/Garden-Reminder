@@ -88,9 +88,10 @@ public class PlantDBHelper extends SQLiteOpenHelper {
             cal.add(Calendar.HOUR_OF_DAY, 10 * 24); // 3 days after today
             long in3day = cal.getTimeInMillis();
 
-            String mySQL = " select *"
+            String mySQL = "select min(_id) as _id, PlantName, PhotoPath, NextWater"
                     + "   from plant "
                     + "  where NextWater <= "  + in3day
+                    + " GROUP BY PlantName "
                     ;
 
             Cursor c1 = db.rawQuery(mySQL, null);
@@ -256,7 +257,7 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 //        }
 //        return plantNameHash;
 //    }
-    public void waterToday(int id) {
+    public void waterToday(String plantName) {
         // action query performed using execSQL
         // add 'XXX' to the name of person whose phone is 555-1111
 //        txtMsg.append("\n-updateDB");
@@ -264,8 +265,8 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
             int date = (int) (Calendar.getInstance().getTimeInMillis());
-            String query = " update plant set lastWater =" + date
-                    + " where _id = " + id;
+            String query = " update plant set lastWater = " + date
+                    + " where PlantName = " + "'" + plantName + "'";
             db.execSQL(query);
 
         } catch (Exception e) {

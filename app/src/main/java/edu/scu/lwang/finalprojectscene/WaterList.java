@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -65,8 +64,8 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
 //        Intent viewPhoto = new Intent(MainActivity.this, ViewPhoto.class);
 //        viewPhoto.putExtra("ImagePath", rowDir).putExtra("Caption", rowNote);
 //        startActivity(viewPhoto);
-//        waterPlant(cursor.getInt(cursor.getColumnIndex("_id")));
-        deletePlant(cursor.getInt(cursor.getColumnIndex("_id")));
+        waterPlant(cursor.getString(cursor.getColumnIndex("PlantName")));
+//        deletePlant(cursor.getInt(cursor.getColumnIndex("_id")));
     }
 
     private void addNewPhoto() {
@@ -84,8 +83,8 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         cursor.requery();
         pa.notifyDataSetChanged();
     }
-    private void waterPlant(int id){
-        dbHelper.waterToday(id);
+    private void waterPlant(String plantName){
+        dbHelper.waterToday(plantName);
         cursor.requery();
         pa.notifyDataSetChanged();
     }
