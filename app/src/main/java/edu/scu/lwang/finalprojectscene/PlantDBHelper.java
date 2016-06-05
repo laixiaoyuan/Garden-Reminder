@@ -265,9 +265,13 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
             int date = (int) (Calendar.getInstance().getTimeInMillis());
-            String query = " update plant set lastWater = " + date
+            int nextDate = date + 86400000 * 2;
+            String query = " update plant set LastWater = " + date
+                    + " where PlantName = " + "'" + plantName + "'";
+            String query1 = " update plant set NextWater = " + nextDate
                     + " where PlantName = " + "'" + plantName + "'";
             db.execSQL(query);
+            db.execSQL(query1);
 
         } catch (Exception e) {
             Log.e("\nError updateDB: ", e.getMessage());
