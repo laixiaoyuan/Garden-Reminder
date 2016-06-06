@@ -47,11 +47,7 @@ public class PlantHistory extends AppCompatActivity {
         gridview.setAdapter(new HistoryAdapter(this, plantHistoryName));
 
         System.out.println("got to the on create in PlantsGridView");
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 9891c454be28cf6000fb0f4dcf0796fa3a9af2d1
 
         ImageButton home = (ImageButton)findViewById(R.id.home);
 
@@ -62,7 +58,7 @@ public class PlantHistory extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
+
 //Home button
 //        ImageButton button4 = (ImageButton) findViewById(R.id.button4);
 //
@@ -72,12 +68,11 @@ public class PlantHistory extends AppCompatActivity {
 //                startActivity(new Intent(WaterList.this, PlatsGridView.class));
 //            }
 //        });
-=======
 
 
         calendar = Calendar.getInstance();
         calendar.setTime(new Date());
->>>>>>> 9891c454be28cf6000fb0f4dcf0796fa3a9af2d1
+
 
         //acquireRunTimePermissions();
     }
