@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class PlantMenu extends AppCompatActivity{
@@ -143,15 +144,18 @@ public class PlantMenu extends AppCompatActivity{
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date;
                 AlertDialog.Builder builder = new AlertDialog.Builder(PlantMenu.this);
                 Plant plant = db.fetchPlantWithIdFor(id);
-                date = plant.nextWater;
+                Date lastDate = plant.lastWater;
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(lastDate);
+                cal.add(Calendar.DATE, plant.waterInterval);
+                Date nextDate = cal.getTime();
                 Format format = new SimpleDateFormat("MM dd yyyy");
 //                format.format(date);
                 builder.setIcon(R.mipmap.ic_launcher)
                         .setTitle("Next Watering date")
-                        .setMessage(format.format(date))
+                        .setMessage(format.format(nextDate))
                         //            .setMessage(cursor.getString(cursor.getColumnIndex("lastWater")))
                         .setCancelable(true)
                 ;

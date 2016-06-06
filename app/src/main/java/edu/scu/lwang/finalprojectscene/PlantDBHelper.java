@@ -108,8 +108,8 @@ public class PlantDBHelper extends SQLiteOpenHelper {
 
     public Cursor getPlant(int recID){
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(" select Latitude, Longitude, " + "RecordPath"+
-                " from photo " +
+        return db.rawQuery(" select NextWater " + ""+
+                " from plant " +
                 " where _id = " + recID, null);
     }
 
@@ -267,7 +267,11 @@ public class PlantDBHelper extends SQLiteOpenHelper {
             int date = (int) (Calendar.getInstance().getTimeInMillis());
             String query = " update plant set lastWater = " + date
                     + " where PlantName = " + "'" + plantName + "'";
+            date = date + 86400000 * 3;
+            String query1 = " update plant set nextWater = " + date
+                    + " where PlantName = " + "'" + plantName + "'";
             db.execSQL(query);
+            db.execSQL(query1);
 
         } catch (Exception e) {
             Log.e("\nError updateDB: ", e.getMessage());
