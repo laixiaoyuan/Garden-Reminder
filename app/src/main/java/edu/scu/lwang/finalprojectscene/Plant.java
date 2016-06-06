@@ -1,5 +1,6 @@
 package edu.scu.lwang.finalprojectscene;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,13 +27,12 @@ public class Plant {
         this.waterInterval = waterInterval;
         this.lastWater = lastWater;
         this.date = date;
-//        this.date = date;
-//
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(new Date());
-//
-//        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
-        nextWater = new Date();
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+
+        cal.add(Calendar.HOUR_OF_DAY, waterInterval * 24);
+        nextWater = cal.getTime();
     }
 
     public String getPlantName() {

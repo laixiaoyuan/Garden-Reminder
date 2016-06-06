@@ -48,7 +48,7 @@ public class PlantCollectionDBHelper extends SQLiteOpenHelper{
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Daisy','http://www.homedepot.com/catalog/productImages/400/3c/3c216a4d-330b-46ef-a69f-3b0e18f1b3bc_400.jpg',14,'Full sun to patial shade','Fertilize every spring with slow-release fertilizer','general-purpose slow-acting granular fertilizer','Aphids, Mealybugs, snails','From spring to fall')";
         db.execSQL(sql);
-        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('peony','http://www.homedepot.com/catalog/productImages/400/c6/c6c89b37-7e55-4068-9134-17d97954a9fd_400.jpg',14,'Full sun','every spring','ow nitrogen fertilizer (5-10-10)','gray mold,Peony blotch,Slugs Or Snails','mid-spring')";
+        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('peony','http://www.homedepot.com/catalog/productImages/400/c6/c6c89b37-7e55-4068-9134-17d97954a9fd_400.jpg',2,'Full sun','every spring','ow nitrogen fertilizer (5-10-10)','gray mold,Peony blotch,Slugs Or Snails','mid-spring')";
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Petunias','http://www.homedepot.com/catalog/productImages/400/08/086bf489-df7e-435b-a12a-2bb736f5e488_400.jpg',7,'full sun to 1/2 day shade','mid July','fertilizer with equal parts of nitrogen, phosphate and potash.','mites, caterpillars, thrips','From spring to fall')";
         db.execSQL(sql);
@@ -56,7 +56,7 @@ public class PlantCollectionDBHelper extends SQLiteOpenHelper{
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Impatiens','http://www.homedepot.com/catalog/productImages/400/c6/c60b71b8-7b4c-4322-806b-8821d0e9e901_400.jpg',7,'full sun to 1/2 day shade','every 2 months','15-15-15 or 20-10-20','Spider mites, mealybugs, aphids, and thrips','From spring to fall')";
         db.execSQL(sql);
-        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('rose','http://www.flowerdelivery.org.uk/wp-content/uploads/2012/07/Valentines-Flowers-01-300x225.jpg',7,'part shade to shade','once a month from Feb to Sep','acid lover fertilizer','Mealy bug','From spring to fall')";
+        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('rose','http://www.flowerdelivery.org.uk/wp-content/uploads/2012/07/Valentines-Flowers-01-300x225.jpg',3,'part shade to shade','once a month from Feb to Sep','acid lover fertilizer','Mealy bug','From spring to fall')";
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Lantana','http://www.homedepot.com/catalog/productImages/400/a1/a1a42570-e9fa-41d0-a3a9-2b91525ee2f9_400.jpg',7,'full sun to 1/2 day shade','Spring and mid summer','low PH fertilizer with sulfur','Whiteflies and Leaf Miner','From spring to fall')";
         db.execSQL(sql);
@@ -70,7 +70,7 @@ public class PlantCollectionDBHelper extends SQLiteOpenHelper{
         db.execSQL(sql);
         sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('chamomile','http://www.pawsdogdaycare.com/sites/default/files/imagecache/poisonous_plant/Anthemis%20nobilis.jpg',5,'Full sun to 1/2 day shade','every spring','complete fertilizer such as 16-4-8','leafminers, aphids, mites','From spring to fall')";
         db.execSQL(sql);
-        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Gerbera','http://www.ourhouseplants.com/imgs-content/gerbera-flowers-red.jpg',7,'Full sun to 1/2 day shade','every spring','complete fertilizer such as 16-4-8','leafminers, aphids, mites','From spring to fall')";
+        sql = "INSERT or replace INTO plantCollection (plantName, photoPath, waterInterval, sun, fertilizeTime, fertilizer, pestsAndDiseases, bloomTime) VALUES('Gerbera','http://www.ourhouseplants.com/imgs-content/gerbera-flowers-red.jpg',1,'Full sun to 1/2 day shade','every spring','complete fertilizer such as 16-4-8','leafminers, aphids, mites','From spring to fall')";
         db.execSQL(sql);
 
     }
