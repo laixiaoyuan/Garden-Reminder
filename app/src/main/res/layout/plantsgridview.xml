@@ -30,9 +30,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
+        />
+=======
         app:backgroundTint="@android:color/holo_orange_dark"
         android:src="@android:drawable/ic_input_add"
         android:tint="@android:color/white" />
+>>>>>>> 9891c454be28cf6000fb0f4dcf0796fa3a9af2d1
 
 
 </RelativeLayout>

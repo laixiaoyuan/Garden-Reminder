@@ -28,6 +28,7 @@ public class Plant {
         this.lastWater = lastWater;
         this.date = date;
 
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
 

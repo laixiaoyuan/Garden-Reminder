@@ -48,6 +48,7 @@ public class PlantHistory extends AppCompatActivity {
 
         System.out.println("got to the on create in PlantsGridView");
 
+
         ImageButton home = (ImageButton)findViewById(R.id.home);
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +59,20 @@ public class PlantHistory extends AppCompatActivity {
         });
 
 
+//Home button
+//        ImageButton button4 = (ImageButton) findViewById(R.id.button4);
+//
+//        button4.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                finish();
+//                startActivity(new Intent(WaterList.this, PlatsGridView.class));
+//            }
+//        });
+
 
         calendar = Calendar.getInstance();
         calendar.setTime(new Date());
+
 
         //acquireRunTimePermissions();
     }
