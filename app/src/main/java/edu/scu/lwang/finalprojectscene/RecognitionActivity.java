@@ -39,7 +39,7 @@ import java.util.Hashtable;
 
 public class RecognitionActivity extends AppCompatActivity {
 
-    final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
+    final CharSequence[] items = { "Take a Photo", "Choose from Gallery", "Cancel" };
     final int REQUEST_CAMERA = 0;
     final int SELECT_FILE = 1;
 
@@ -68,7 +68,7 @@ public class RecognitionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recognition);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RecognitionActivity.this);
-        builder.setTitle("Add Photo!");
+        builder.setTitle("Add Photo");
         boolean result = Utility.checkPermission(RecognitionActivity.this);
 
         imageView = (ImageView) findViewById(R.id.imageView);
