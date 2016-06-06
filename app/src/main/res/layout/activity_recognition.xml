@@ -33,7 +33,9 @@
                 android:id="@+id/btnSelectPhoto"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                />
 
             <ImageView
                 android:layout_width="match_parent"
