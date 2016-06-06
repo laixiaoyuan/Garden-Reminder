@@ -203,7 +203,7 @@ public class PlantDBHelper extends SQLiteOpenHelper {
         int lastWater = cursor.getInt(4);
         //  int date = cursor.getInt(9);
 //public Plant(int id, String plantName, String photoPath, String date, int waterInterval, Date lastWater)
-        Plant plant= new Plant(id, plantName, plantPicPath, null, 0, new Date());
+        Plant plant= new Plant(id, plantName, plantPicPath, null, waterInterval, new Date());
 
         return plant;
     }

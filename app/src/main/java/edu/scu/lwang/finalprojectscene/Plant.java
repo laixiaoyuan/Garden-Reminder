@@ -27,8 +27,8 @@ public class Plant {
         this.waterInterval = waterInterval;
         this.lastWater = lastWater;
         this.date = date;
-//        this.date = date;
-//
+
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
 
