@@ -149,12 +149,12 @@ public class PlantMenu extends AppCompatActivity{
 //                Calendar cal = Calendar.getInstance();
 //                cal.setTime(lastDate);
 //                cal.add(Calendar.DATE, plant.waterInterval);
-//                Date nextDate = cal.getTime();
+//                Date nextDate = cal.getTime();`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
                 Cursor cursor = db.getPlant(id);
                 cursor.moveToFirst();
-                int date = cursor.getInt(cursor.getColumnIndex("NextWater"));
+                long date = cursor.getLong(cursor.getColumnIndex("NextWater"));
                 Date next = new Date(date);
-                Format format = new SimpleDateFormat("MM dd yyyy");
+                Format format = new SimpleDateFormat("MM/dd/yyyy");
 //                format.format(date);
                 builder.setIcon(R.mipmap.ic_launcher)
                         .setTitle("Next Watering date")

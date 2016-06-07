@@ -10,7 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by mingming on 5/9/16.
@@ -30,9 +30,11 @@ public class WaterListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         String plantName = cursor.getString(cursor.getColumnIndex("PlantName"));
         String imagePath = cursor.getString(cursor.getColumnIndex("PhotoPath"));
-        int fromNow = (cursor.getInt(cursor.getColumnIndex("NextWater")) - (int)Calendar.getInstance().getTimeInMillis()) / 86400000;
+        long next = cursor.getLong(cursor.getColumnIndex("NextWater"));
+        long now = new Date().getTime();
+        int fromNow = (int)((next - now )/ 86400000);
         String waterDay;
-        if(fromNow == 0){
+        if(fromNow <= 0){
             waterDay = "Today";
         }else if(fromNow == 1){
             waterDay = "Tomorrow";
@@ -47,7 +49,7 @@ public class WaterListAdapter extends CursorAdapter {
         tvWater.setText(waterDay);
 
         TextView tvDone = (TextView)view.findViewById(R.id.textView5);
-        tvDone.setText("Water It!");
+        tvDone.setText("Water me!");
 
 //        BitmapFactory.Options optio
     }

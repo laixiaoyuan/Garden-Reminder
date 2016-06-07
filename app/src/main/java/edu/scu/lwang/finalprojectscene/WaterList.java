@@ -64,7 +64,9 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
 //        Intent viewPhoto = new Intent(MainActivity.this, ViewPhoto.class);
 //        viewPhoto.putExtra("ImagePath", rowDir).putExtra("Caption", rowNote);
 //        startActivity(viewPhoto);
-        waterPlant(cursor.getString(cursor.getColumnIndex("PlantName")));
+        String plantName = cursor.getString(cursor.getColumnIndex("PlantName"));
+        int waterInterval = cursor.getInt(cursor.getColumnIndex("WaterInterval"));
+        waterPlant(plantName, waterInterval);
 //        deletePlant(cursor.getInt(cursor.getColumnIndex("_id")));
     }
 
@@ -83,8 +85,8 @@ public class WaterList extends AppCompatActivity implements AdapterView.OnItemCl
         cursor.requery();
         pa.notifyDataSetChanged();
     }
-    private void waterPlant(String plantName){
-        dbHelper.waterToday(plantName);
+    private void waterPlant(String plantName, int waterInterval){
+        dbHelper.waterToday(plantName, waterInterval);
         cursor.requery();
         pa.notifyDataSetChanged();
     }
