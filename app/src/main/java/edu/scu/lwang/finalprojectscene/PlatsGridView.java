@@ -24,11 +24,8 @@ public class PlatsGridView extends AppCompatActivity {
 
 
     Context context;
-    //    PendingIntent pendingIntent;
     AlarmManager alarm_manager;
-    //    ArrayList<AlarmManager> alarmList = new ArrayList<>();
     Calendar calendar;
-//    ArrayList<Calendar> calList = new ArrayList<>();
 
     String fileName;
     String userChoosenTask;
@@ -66,8 +63,7 @@ public class PlatsGridView extends AppCompatActivity {
                 i.putExtras(b);
 
                 startActivity(i);
-//                Toast.makeText(HelloGridView.this, "" + position,
-//                        Toast.LENGTH_SHORT).show();
+
             }
         });
         // set callback for create notification button
@@ -75,8 +71,6 @@ public class PlatsGridView extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-//        calendar.set(Calendar.HOUR_OF_DAY, 11);
-//        calendar.set(Calendar.MINUTE, 19);
 
         calendar.setTime(new Date());
 
@@ -95,103 +89,12 @@ public class PlatsGridView extends AppCompatActivity {
 
         //acquireRunTimePermissions();
     }
-    //
-////    private void addNewPlant(){
-////        final CharSequence[] items = { "Take Photo", "Choose from Gallery",
-////                "Cancel" };
-////        AlertDialog.Builder builder = new AlertDialog.Builder(PlantsGridView.this);
-////        builder.setTitle("Add Photo!");
-////        builder.setItems(items, new DialogInterface.OnClickListener() {
-////            @Override
-////            public void onClick(DialogInterface dialog, int item) {
-////                //boolean result = Utility.checkPermission(PlantsGridView.this);
-////                //System.out.println("hi i passed with " + result);
-////                if (items[item].equals("Take Photo")) {
-////                    userChoosenTask="Take Photo";
-////                    //   if(result)
-////                    cameraIntent();
-////                } else if (items[item].equals("Choose from Gallery")) {
-////                    userChoosenTask="Choose from Gallery";
-////                    //   if(result)
-////                    galleryIntent();
-////                } else if (items[item].equals("Cancel")) {
-////                    dialog.dismiss();
-////                }
-////            }
-////        });
-////        builder.show();
-////    }
-////
-////    private void cameraIntent(){
-////        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-////        if (intent.resolveActivity(getPackageManager()) == null) {
-////            Toast.makeText(getApplicationContext(), "Cannot take pictures on this device!", Toast.LENGTH_SHORT).show();
-////            return;
-////        }
-////
-////        fileName = getOutputFileName();
-////        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(fileName));
-////
-////        startActivityForResult(intent, 1234);
-////    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode != 1234 || resultCode != RESULT_OK) return;
-//
-//        Intent intent=new Intent(PlatsGridView.this, PlantFrameName.class);//connect to xiaoyuan's recognition activity for image recognitions
-//
-//        Bundle bundle = new Bundle();
-//        bundle.putString("plantPicPath", fileName);
-//        System.out.println("THIS IS THE PATH: " + fileName);
-//        intent.putExtras(bundle);
-//
-//        startActivity(intent);
-////        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-////        imageView.setImageURI(Uri.parse(fileName));
-////        imageView.setRotation(180f);
-//    }
-//
-//
-//    private String getOutputFileName() {
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String filename =
-//                "file://"
-//                        + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//                        + "/JPEG_"
-//                        + timeStamp
-//                        + ".jpg";
-//        Log.i("lwang", filename);
-//        return filename;
-//    }
-//
-//    private void acquireRunTimePermissions() {
-//        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    111);
-//        }
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        if (requestCode != 111) return;
-//        if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(getApplicationContext(), "Great! We have the permission!", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(getApplicationContext(), "Cannot write to external storage! App will not work properly!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//
-//
+
     private void galleryIntent()
     {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        //startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -201,14 +104,14 @@ public class PlatsGridView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_waterList:
-                Intent home = new Intent(PlatsGridView.this,WaterList.class);
-                startActivity(home);
+            case R.id.infomation:
+                Intent information = new Intent(PlatsGridView.this,Information.class);
+                startActivity(information);
                 break;
-//            case R.id.home:
-//                Intent home = new Intent(MainActivity.this,ZooInfo.class);
-//                startActivity(home);
-//                break;
+            case R.id.action_waterList:
+                Intent waterList = new Intent(PlatsGridView.this,WaterList.class);
+                startActivity(waterList);
+                break;
             default:
         }
 
