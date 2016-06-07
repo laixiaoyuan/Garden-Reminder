@@ -34,9 +34,9 @@ public class WaterListAdapter extends CursorAdapter {
         long now = new Date().getTime();
         int fromNow = (int)((next - now )/ 86400000);
         String waterDay;
-        if(fromNow <= 0){
+        if(next < now){
             waterDay = "Today";
-        }else if(fromNow == 1){
+        }else if(fromNow == 0){
             waterDay = "Tomorrow";
         }else{
             waterDay = "In 1 week";
